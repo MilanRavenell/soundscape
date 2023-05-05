@@ -4,31 +4,60 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import queryString from 'query-string';
 import axios from 'axios';
 import theAlgorithm from './alogrithm';
+import * as WebBrowser from 'expo-web-browser';
+import { makeRedirectUri, ResponseType, useAuthRequest } from 'expo-auth-session';
+import { Player } from './components'; 
 
-const spotifyLogin = () => {
-  console.log('hiiii')
-  const state = 'hiii';//generateRandomString(16);
-  const scope = 'user-read-private user-read-email app-remote-control user-modify-playback-state';
+WebBrowser.maybeCompleteAuthSession();
 
-  window.location.href = ('https://accounts.spotify.com/authorize?' +
-    queryString.stringify({
-      response_type: 'code',
-      client_id: '43bfe982f35949b793aa78aac13b784b',
-      scope: scope,
-      redirect_uri: 'http://localhost:3000/spotify-callback',
-      state: state
-    }));
-}
+const discovery = {
+  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+  tokenEndpoint: 'https://accounts.spotify.com/api/token',
+};
 
 export default function App() {
+  const [spotifyAccessToken, setSpotifyAccessToken] = useState(null);
   const [textfieldValue, setTextfieldValue] = useState('');
   const [searchedTracks, setSearchedTracks] = useState([]);
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [generatedTracks, setGeneratedTracks] = useState([]);
   const [curPlayingTrack, setCurPlayingTrack] = useState(null);
   const [isPaused, setIsPaused] = useState(true);
-  const [duration, setDuration] = useState(null);
+  const [playerToggle, setPlayerToggle] = useState(false);
   const [accessTokenValid, setAccessTokenValid] = useState(null);
+  const [activated, setActivated] = useState(false);
+
+  const parsedUrl = queryString.parseUrl(window.location.href);
+  console.log(parsedUrl);
+  const domain = parsedUrl.url.slice(0, -1);
+
+  console.log('dom: ', domain)
+  const queryParams = parsedUrl.query;
+
+  const [spotifyAuthRequest, spotifyAuthResponse, promptSpotifyLoginAsync] = useAuthRequest(
+    {
+      responseType: ResponseType.Token,
+      clientId: '43bfe982f35949b793aa78aac13b784b',
+      scopes: [
+        'user-read-private user-read-email',
+        'app-remote-control',
+        'user-modify-playback-state',
+        'user-read-playback-state',
+      ],
+      // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
+      // this must be set to false
+      usePKCE: false,
+      redirectUri: domain
+    },
+    discovery,
+  );
+
+  useEffect(() => {
+    if (spotifyAuthResponse?.type === 'success') {
+      const { access_token } = spotifyAuthResponse.params;
+      setSpotifyAccessToken(access_token);
+    }
+  }, [spotifyAuthResponse]);
 
   const addSelectedTrack = (track) => {
     const curTracks = [...selectedTracks];
@@ -42,37 +71,90 @@ export default function App() {
     setSelectedTracks(curTracks);
   }
 
-  const queryParams = queryString.parseUrl(window.location.href).query;
+  const play = async (tracks) => {
+    if (!spotifyAccessToken) {
+      return;
+    }
 
-  const accessToken = queryParams.accessToken;
-
-  const play = async (track) => {
+    console.log(tracks)
     await axios.put(
       'https://api.spotify.com/v1/me/player/play',
-      track ? { uris: [`spotify:track:${track.id}`] } : {},
+      tracks ? { uris: tracks } : {},
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${spotifyAccessToken}`,
+        }
+      }
+    )
+  };
+
+  const pause = async () => {
+    if (!spotifyAccessToken) {
+      return;
+    }
+
+    await axios.put(
+      'https://api.spotify.com/v1/me/player/pause',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${spotifyAccessToken}`,
         }
       }
     )
   }
 
+  // Every 500 milliseconds, get playback state
   useEffect(() => {
     (async () => {
-      console.log('dur: ', duration);
-      if (!isPaused) {
-        await new Promise(r => setTimeout(r, 1));
-        setDuration(duration + 1);
+      if (!activated || !curPlayingTrack || !spotifyAccessToken) {
+        return;
+      }
 
-        if (duration >= curPlayingTrack.duration_ms) {
-          onNextClick();
+      const player = (await axios.get(
+        'https://api.spotify.com/v1/me/player',
+        {
+          headers: {
+            Authorization: `Bearer ${spotifyAccessToken}`,
+          }
+        },
+      )).data;
+
+      console.log('bruh: ', player);
+
+      if (player.item) {
+        setCurPlayingTrack(player.item);
+        const genSongsIds = generatedTracks.map((track) => track.id);
+
+        // if the current song is in the up next playlist, remove it
+        const cursongIndex = genSongsIds.indexOf(player?.item?.id);
+        if (cursongIndex !== -1) {
+          const genTracksCopy = [...generatedTracks];
+          genTracksCopy.splice(cursongIndex, 1);
+          setGeneratedTracks(genTracksCopy);
         }
       }
-    })();
-  }, [duration, isPaused, curPlayingTrack])
 
-  const onPlayClick = () => {
+      if (player.repeat_state !== 'off') {
+        await axios.put(
+          'https://api.spotify.com/v1/me/player/repeat?state=off',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${spotifyAccessToken}`,
+            }
+          }
+        )
+      }
+
+      setIsPaused(!player.is_playing);
+
+      await new Promise(r => setTimeout(r, 500));
+      setPlayerToggle(!playerToggle);
+    })();
+  }, [playerToggle, curPlayingTrack, activated, generatedTracks, spotifyAccessToken])
+
+  const onPlayClick = async () => {
     if (generatedTracks.length === 0) {
       return;
     }
@@ -82,14 +164,13 @@ export default function App() {
       const curTrack = curTracks.shift();
       setCurPlayingTrack(curTrack);
       setGeneratedTracks(curTracks);
-      play(curTrack);
-      setDuration(0);
+      await play(generatedTracks.map((track) => `spotify:track:${track.id}`));
       setIsPaused(false);
+      setActivated(true);
       return;
     }
 
-    play();
-    setIsPaused(!isPaused);
+    isPaused ? play() : pause();
   }
 
   const onNextClick = () => {
@@ -102,20 +183,20 @@ export default function App() {
     setCurPlayingTrack(curTrack);
     setGeneratedTracks(curTracks);
     setIsPaused(false);
-    setDuration(0);
-    play(curTrack);
+    play(generatedTracks.map((track) => `spotify:track:${track.id}`));
   }
 
   // On boot, check if spotify access token is valid
   useEffect(() => {
+    return
     (async () => {
       console.log('testing access token...')
       try {
-        const response = await axios.get(
+        await axios.get(
           'https://api.spotify.com/v1/me',
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${spotifyAccessToken}`,
             }
           },
         );
@@ -128,26 +209,24 @@ export default function App() {
         }
       }
     })()
-  }, []);
-
-  useEffect(() => {
-    if (accessTokenValid === false) {
-      spotifyLogin();
-    }
-  }, [accessTokenValid]);
+  }, [spotifyAccessToken]);
 
   useEffect(() => {
     (async () => {
-      const gen = await theAlgorithm(selectedTracks, accessToken)
+      if (!spotifyAccessToken) {
+        return;
+      }
+
+      const gen = await theAlgorithm(selectedTracks, spotifyAccessToken)
       setGeneratedTracks(gen);
     })();
-  }, [accessToken, selectedTracks])
+  }, [spotifyAccessToken, selectedTracks])
 
   useEffect(() => {
     (async () => {
       console.log(textfieldValue);
 
-      if (textfieldValue === '') {
+      if (textfieldValue === '' || !spotifyAccessToken) {
         return;
       }
 
@@ -155,13 +234,19 @@ export default function App() {
         `https://api.spotify.com/v1/search?q=${textfieldValue}&type=track`,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${spotifyAccessToken}`,
           }
         }
       )).data;
       setSearchedTracks(response.tracks.items);
     })();
-  }, [textfieldValue]);
+  }, [textfieldValue, spotifyAccessToken]);
+
+  return (
+    <View style={{ width: '100%', height: '100%' }}>
+      <Player/>
+    </View>
+  )
 
   if (accessTokenValid === null) {
     return (
@@ -173,10 +258,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={{ display: 'flex', flexDirection: 'row' }}>
-        <Text>{'Now Playing: ' + (curPlayingTrack ? `${curPlayingTrack?.name} - ${curPlayingTrack?.artists[0].name}` : '')}</Text>
+      {!accessTokenValid && (
+        <View>
+          <Button
+            title={'get spotify access token'}
+            style={{ marginRight: '10px' }}
+            onPress={promptSpotifyLoginAsync}
+          />
+        </View>
+      )}
+      <View style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+        <Text style={{ flex: 1 }}>{'Now Playing: ' + (curPlayingTrack ? `${curPlayingTrack?.name} - ${curPlayingTrack?.artists[0].name}` : '')}</Text>
         <Button
-          title={isPaused ? 'play' : 'paused'}
+          title={isPaused ? (activated ? 'play': 'start') : 'paused'}
           style={{ marginRight: '10px' }}
           onPress={onPlayClick}
           disabled={!accessTokenValid}
@@ -184,7 +278,7 @@ export default function App() {
         <Button
           title={'next'}
           onPress={onNextClick}
-          disabled={!accessTokenValid}
+          disabled={!accessTokenValid || !activated}
         />
       </View>
       <View style={{ display: 'flex', width: '100%', flexDirection: 'row', padding: '10px', flex: 1 }}>
