@@ -1,0 +1,5 @@
+type Soundscape @model {
+  id: ID!
+  name: String!
+  members: [String]!
+}

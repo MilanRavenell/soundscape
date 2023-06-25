@@ -1,0 +1,9 @@
+type SeedSong @model {
+  key: String! @primaryKey #<spotifyId>_<userId>_<soundscapeId>
+  spotifyId: String!
+  userId: String!
+  soundscapeId: String!
+  name: String!
+  artists: [String!]!
+  thumbnailUrl: String!
+}

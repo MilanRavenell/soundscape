@@ -1,0 +1,26 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soundscape-staging-05511-authRole",
+      "UnauthRoleArn": "arn:aws:iam::131035239309:role/amplify-soundscape-staging-05511-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::131035239309:role/amplify-soundscape-staging-05511-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-soundscape-staging-05511-deployment",
+      "UnauthRoleName": "amplify-soundscape-staging-05511-unauthRole",
+      "StackName": "amplify-soundscape-staging-05511",
+      "StackId": "arn:aws:cloudformation:us-west-2:131035239309:stack/amplify-soundscape-staging-05511/f0384830-12f2-11ee-a024-0a1c2f51815b",
+      "AmplifyAppId": "d2gt3p3uugepx6"
+    },
+    "categories": {
+      "function": {
+        "coreResolver": {
+          "deploymentBucketName": "amplify-soundscape-staging-05511-deployment",
+          "s3Key": "amplify-builds/coreResolver-366a4a5457466c314e67-build.zip"
+        }
+      },
+      "api": {
+        "soundscape": {}
+      }
+    }
+  }
+}
