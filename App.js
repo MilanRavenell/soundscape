@@ -18,6 +18,10 @@ import {
   SoundscapeSelectionView,
   SoundscapeView,
 } from './components';
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+
+Amplify.configure(config);
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -95,12 +99,13 @@ export default function App() {
           <OptionsModal
             closeModal={context.funcCloseModal}
             onSeedSongsPressed={context.funcOpenSeedSongsModal}
+            onLeaveSoundscapePressed={context.funcDeleteSoundscape}
           />
         )}
         {context.state.seedSongsModalOpen && (
           <SeedSongsModal
             closeModal={context.funcCloseModal}
-            seedSongs={selectedSoundscape.seedSongs}
+            seedSongs={selectedSoundscape.seedTracks}
             user={context.state.user}
             onAddSongsPressed={context.funcOpenAddSeedSongsModal}
             onRemoveSongPressed={context.funcRemoveSeedSong}
@@ -110,7 +115,7 @@ export default function App() {
           <AddSeedSongsModal
             closeModal={context.funcCloseModal}
             searchSongs={context.state.searchedTracks}
-            seedSongs={selectedSoundscape.seedSongs}
+            seedSongs={selectedSoundscape.seedTracks}
             query={context.state.searchQuery}
             onSongPressed={context.funcAddSeedSong}
             onDonePressed={context.funcOpenSeedSongsModal}

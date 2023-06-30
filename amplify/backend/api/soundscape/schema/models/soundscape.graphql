@@ -1,5 +1,12 @@
-type Soundscape @model {
-  id: ID!
+type Soundscape
+@model
+@auth(rules: [
+  { allow: public },
+])
+{
+  id: String!
   name: String!
-  members: [String]!
+  members: [SoundscapeMember!] @hasMany(indexName: "BySoundscapeId", fields: ["id"])
+  createdAt: String!
+  updatedAt: String!
 }

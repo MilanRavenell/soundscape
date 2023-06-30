@@ -7,8 +7,8 @@ export default async function genTracks(
 ) {
 
   return theAlgorithm(
-    soundscape.seedSongs,
-    soundscape.members.map(({ topSongs }) => topSongs).flat(),
+    soundscape.seedTracks,
+    soundscape.members.map(({ topTracks }) => topTracks).flat(),
     limit,
     spotifyAccessToken,
   );

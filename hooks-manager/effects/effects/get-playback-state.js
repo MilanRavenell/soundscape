@@ -35,7 +35,7 @@ export default function getPlaybackState({
 
       if (player?.item && player?.is_playing) {
         setState('curPlayingTrack', player.item);
-        const curQueueSongIds = selectedSoundscape.queueSongs.map((track) => track.id);
+        const curQueueSongIds = selectedSoundscape.queueTracks.map((track) => track.id);
 
         // if the current song is in the up next playlist, remove it and replace it
         const curSongIndex = curQueueSongIds.indexOf(player?.item?.id);
@@ -47,7 +47,7 @@ export default function getPlaybackState({
         if (curSongIndex === -1) {
           curTracks.push(...[
             player.item,
-            ...selectedSoundscape.queueSongs,
+            ...selectedSoundscape.queueTracks,
           ]);
 
           // playTracks(curTracks, player.progress_ms);
@@ -55,7 +55,7 @@ export default function getPlaybackState({
             soundscapes,
             selectedSoundscapeIndex,
             {
-              queueSongs: curTracks,
+              queueTracks: curTracks,
             },
             setState,
           );
@@ -69,7 +69,7 @@ export default function getPlaybackState({
           // };
 
           curTracks.push(...[
-            ...selectedSoundscape.queueSongs.slice(curSongIndex),
+            ...selectedSoundscape.queueTracks.slice(curSongIndex),
           ]);
 
           // const offset = parseInt(performance.now() - start);
@@ -79,7 +79,7 @@ export default function getPlaybackState({
             soundscapes,
             selectedSoundscapeIndex,
             {
-              queueSongs: curTracks,
+              queueTracks: curTracks,
             },
             setState,
           );

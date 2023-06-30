@@ -2,11 +2,15 @@ projects:
   soundscape:
     schemaPath: Users/milanravenell/Projects/soundscape/graphql/schema.json
     includes:
-      - src/graphql/**/*.ts
+      - graphql/**/*.ts
     excludes:
       - ./amplify/**
     extensions:
       amplify:
         codeGenTarget: typescript
-        generatedFileName: src/API.ts
-        docsFilePath: src/graphql
+        generatedFileName: API.ts
+        docsFilePath: graphql
+        maxDepth: 4
+extensions:
+  amplify:
+    version: 3

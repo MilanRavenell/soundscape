@@ -1,5 +1,5 @@
-// import * as API from '../../../graphql-api';
+import * as API from '../../../graphql-api';
 
 export default function api({}) {
-  // return API;
+  return API;
 }

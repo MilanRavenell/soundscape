@@ -4,6 +4,7 @@ import funcAddToQueue from './func-add-to-queue';
 import funcCloseLoginDialog from './func-close-login-dialog';
 import funcCloseModal from './func-close-modal';
 import funcCreateNewSoundscape from './func-create-new-soundscape';
+import funcDeleteSoundscape from './func-delete-soundscape';
 import funcDeselectSoundscape from './func-deselect-soundscape';
 import funcOnLoginDialogConfirmation from './func-on-login-dialog-confirmation';
 import funcOnNextPressed from './func-on-next-pressed';
@@ -25,6 +26,7 @@ const properties = {
   funcCloseLoginDialog,
   funcCloseModal,
   funcCreateNewSoundscape,
+  funcDeleteSoundscape,
   funcDeselectSoundscape,
   funcOnLoginDialogConfirmation,
   funcOnNextPressed,

@@ -1,9 +1,15 @@
 import axios from 'axios';
+import rateLimit from 'axios-rate-limit';
 
-const theAlgorithm = async (seedSongs, topSongs, limit, accessToken) => {
+const http = rateLimit(
+  axios.create(),
+  { maxRequests: 10000, perMilliseconds: 500, maxRPS: 2 }
+);
+
+const theAlgorithm = async (seedSongs, topTrackIds, limit, accessToken) => {
   return (await Promise.all([
     ...seedSongs.map((song) => ({ song, source: 'seed' })),
-    ...topSongs.map((song) => ({ song, source: 'top' })),
+    ...topTrackIds.map((song) => ({ song, source: 'top' })),
   ].map(async ({ song, source }) => {
     const response = (await axios.get(
       `https://api.spotify.com/v1/recommendations?limit=100&seed_artists=&seed_genres=&seed_tracks=${song.id}`,

@@ -22,7 +22,7 @@ const SoundscapeView = ({
           </Pressable>
           <View style={styles.main}>
             <Player
-              songs={soundscape.queueSongs}
+              songs={soundscape.queueTracks}
               isPaused={playerIsPaused}
               isActive={isActive}
               onPlayPressed={onPlayPressed}

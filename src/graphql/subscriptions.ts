@@ -2,13 +2,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateSeedSong = /* GraphQL */ `
-  subscription OnCreateSeedSong($filter: ModelSubscriptionSeedSongFilterInput) {
-    onCreateSeedSong(filter: $filter) {
+export const onCreateSeedTrack = /* GraphQL */ `
+  subscription OnCreateSeedTrack(
+    $filter: ModelSubscriptionSeedTrackFilterInput
+  ) {
+    onCreateSeedTrack(filter: $filter) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
@@ -17,13 +19,15 @@ export const onCreateSeedSong = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateSeedSong = /* GraphQL */ `
-  subscription OnUpdateSeedSong($filter: ModelSubscriptionSeedSongFilterInput) {
-    onUpdateSeedSong(filter: $filter) {
+export const onUpdateSeedTrack = /* GraphQL */ `
+  subscription OnUpdateSeedTrack(
+    $filter: ModelSubscriptionSeedTrackFilterInput
+  ) {
+    onUpdateSeedTrack(filter: $filter) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
@@ -32,16 +36,114 @@ export const onUpdateSeedSong = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteSeedSong = /* GraphQL */ `
-  subscription OnDeleteSeedSong($filter: ModelSubscriptionSeedSongFilterInput) {
-    onDeleteSeedSong(filter: $filter) {
+export const onDeleteSeedTrack = /* GraphQL */ `
+  subscription OnDeleteSeedTrack(
+    $filter: ModelSubscriptionSeedTrackFilterInput
+  ) {
+    onDeleteSeedTrack(filter: $filter) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSoundscapeMember = /* GraphQL */ `
+  subscription OnCreateSoundscapeMember(
+    $filter: ModelSubscriptionSoundscapeMemberFilterInput
+  ) {
+    onCreateSoundscapeMember(filter: $filter) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSoundscapeMember = /* GraphQL */ `
+  subscription OnUpdateSoundscapeMember(
+    $filter: ModelSubscriptionSoundscapeMemberFilterInput
+  ) {
+    onUpdateSoundscapeMember(filter: $filter) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSoundscapeMember = /* GraphQL */ `
+  subscription OnDeleteSoundscapeMember(
+    $filter: ModelSubscriptionSoundscapeMemberFilterInput
+  ) {
+    onDeleteSoundscapeMember(filter: $filter) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -54,7 +156,15 @@ export const onCreateSoundscape = /* GraphQL */ `
     onCreateSoundscape(filter: $filter) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -67,7 +177,15 @@ export const onUpdateSoundscape = /* GraphQL */ `
     onUpdateSoundscape(filter: $filter) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -80,7 +198,15 @@ export const onDeleteSoundscape = /* GraphQL */ `
     onDeleteSoundscape(filter: $filter) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -89,10 +215,19 @@ export const onDeleteSoundscape = /* GraphQL */ `
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
     onCreateUser(filter: $filter) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }
@@ -101,10 +236,19 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
     onUpdateUser(filter: $filter) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }
@@ -113,10 +257,19 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
     onDeleteUser(filter: $filter) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }

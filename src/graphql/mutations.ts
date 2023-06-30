@@ -2,16 +2,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createSeedSong = /* GraphQL */ `
-  mutation CreateSeedSong(
-    $input: CreateSeedSongInput!
-    $condition: ModelSeedSongConditionInput
+export const createSeedTrack = /* GraphQL */ `
+  mutation CreateSeedTrack(
+    $input: CreateSeedTrackInput!
+    $condition: ModelSeedTrackConditionInput
   ) {
-    createSeedSong(input: $input, condition: $condition) {
+    createSeedTrack(input: $input, condition: $condition) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
@@ -20,16 +20,16 @@ export const createSeedSong = /* GraphQL */ `
     }
   }
 `;
-export const updateSeedSong = /* GraphQL */ `
-  mutation UpdateSeedSong(
-    $input: UpdateSeedSongInput!
-    $condition: ModelSeedSongConditionInput
+export const updateSeedTrack = /* GraphQL */ `
+  mutation UpdateSeedTrack(
+    $input: UpdateSeedTrackInput!
+    $condition: ModelSeedTrackConditionInput
   ) {
-    updateSeedSong(input: $input, condition: $condition) {
+    updateSeedTrack(input: $input, condition: $condition) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
@@ -38,19 +38,118 @@ export const updateSeedSong = /* GraphQL */ `
     }
   }
 `;
-export const deleteSeedSong = /* GraphQL */ `
-  mutation DeleteSeedSong(
-    $input: DeleteSeedSongInput!
-    $condition: ModelSeedSongConditionInput
+export const deleteSeedTrack = /* GraphQL */ `
+  mutation DeleteSeedTrack(
+    $input: DeleteSeedTrackInput!
+    $condition: ModelSeedTrackConditionInput
   ) {
-    deleteSeedSong(input: $input, condition: $condition) {
+    deleteSeedTrack(input: $input, condition: $condition) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSoundscapeMember = /* GraphQL */ `
+  mutation CreateSoundscapeMember(
+    $input: CreateSoundscapeMemberInput!
+    $condition: ModelSoundscapeMemberConditionInput
+  ) {
+    createSoundscapeMember(input: $input, condition: $condition) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSoundscapeMember = /* GraphQL */ `
+  mutation UpdateSoundscapeMember(
+    $input: UpdateSoundscapeMemberInput!
+    $condition: ModelSoundscapeMemberConditionInput
+  ) {
+    updateSoundscapeMember(input: $input, condition: $condition) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSoundscapeMember = /* GraphQL */ `
+  mutation DeleteSoundscapeMember(
+    $input: DeleteSoundscapeMemberInput!
+    $condition: ModelSoundscapeMemberConditionInput
+  ) {
+    deleteSoundscapeMember(input: $input, condition: $condition) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -64,7 +163,15 @@ export const createSoundscape = /* GraphQL */ `
     createSoundscape(input: $input, condition: $condition) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -78,7 +185,15 @@ export const updateSoundscape = /* GraphQL */ `
     updateSoundscape(input: $input, condition: $condition) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -92,7 +207,15 @@ export const deleteSoundscape = /* GraphQL */ `
     deleteSoundscape(input: $input, condition: $condition) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -104,10 +227,19 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }
@@ -119,10 +251,19 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }
@@ -134,10 +275,19 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
-      id
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }

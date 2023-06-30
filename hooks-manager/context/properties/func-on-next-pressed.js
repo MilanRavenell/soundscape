@@ -13,13 +13,13 @@ export default function funcOnNextPressed({
   return useCallback(async () => {
     if (
       !selectedSoundscape ||
-      !selectedSoundscape.queueSongs ||
-      selectedSoundscape.queueSongs.length === 0
+      !selectedSoundscape.queueTracks ||
+      selectedSoundscape.queueTracks.length === 0
     ) {
       return;
     }
 
-    const curTracks = selectedSoundscape.queueSongs;
+    const curTracks = selectedSoundscape.queueTracks;
     console.log('tracks: ', curTracks)
     curTracks.shift();
 
@@ -28,7 +28,7 @@ export default function funcOnNextPressed({
       soundscapes,
       selectedSoundscapeIndex,
       {
-        queueSongs: curTracks,
+        queueTracks: curTracks,
       },
       setState,
     );

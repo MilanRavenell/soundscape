@@ -1,4 +1,6 @@
 import { genTracks } from '../../shared';
+import { createSoundscape, createSoundscapeMember} from '../../../graphql-api';
+const { v4: uuidv4 } = require('uuid');
 
 export default function funcCreateNewSoundscape({
   state,
@@ -11,14 +13,25 @@ export default function funcCreateNewSoundscape({
 
   return useCallback(async () => {
     const newSoundscape = {
-      id: 'bigballer',
+      id: uuidv4(),
       name: 'New Soundscape',
       members: [user],
-      seedSongs: [],
-      queueSongs: [],
+      seedTracks: [],
+      queueTracks: [],
     };
 
-    newSoundscape.queueSongs = await genTracks(newSoundscape, spotifyAccessToken);
+    await createSoundscape({
+      id: newSoundscape.id,
+      name: newSoundscape.name,
+    });
+
+    await createSoundscapeMember({
+      userId: user.id,
+      soundscapeId: newSoundscape.id,
+    })
+
+
+    newSoundscape.queueTracks = await genTracks(newSoundscape, spotifyAccessToken);
     console.log('newSoundscape: ', newSoundscape);
 
     const newSoundscapes = [
@@ -28,5 +41,5 @@ export default function funcCreateNewSoundscape({
 
     setState('soundscapes', newSoundscapes);
     setState('selectedSoundscapeIndex', newSoundscapes.length - 1);
-  }, [soundscapes, user, setState]);
+  }, [soundscapes, user, spotifyAccessToken, setState]);
 }

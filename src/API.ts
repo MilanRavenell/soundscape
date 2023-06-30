@@ -2,26 +2,30 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateSeedSongInput = {
+export type CreateSeedTrackInput = {
   key: string,
   spotifyId: string,
-  userId: string,
   soundscapeId: string,
+  userId: string,
   name: string,
   artists: Array< string >,
   thumbnailUrl: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
-export type ModelSeedSongConditionInput = {
+export type ModelSeedTrackConditionInput = {
   spotifyId?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
   soundscapeId?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
   name?: ModelStringInput | null,
   artists?: ModelStringInput | null,
   thumbnailUrl?: ModelStringInput | null,
-  and?: Array< ModelSeedSongConditionInput | null > | null,
-  or?: Array< ModelSeedSongConditionInput | null > | null,
-  not?: ModelSeedSongConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSeedTrackConditionInput | null > | null,
+  or?: Array< ModelSeedTrackConditionInput | null > | null,
+  not?: ModelSeedTrackConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -64,12 +68,12 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type SeedSong = {
-  __typename: "SeedSong",
+export type SeedTrack = {
+  __typename: "SeedTrack",
   key: string,
   spotifyId: string,
-  userId: string,
   soundscapeId: string,
+  userId: string,
   name: string,
   artists: Array< string >,
   thumbnailUrl: string,
@@ -77,47 +81,107 @@ export type SeedSong = {
   updatedAt: string,
 };
 
-export type UpdateSeedSongInput = {
+export type UpdateSeedTrackInput = {
   key: string,
   spotifyId?: string | null,
-  userId?: string | null,
   soundscapeId?: string | null,
+  userId?: string | null,
   name?: string | null,
   artists?: Array< string > | null,
   thumbnailUrl?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
-export type DeleteSeedSongInput = {
+export type DeleteSeedTrackInput = {
   key: string,
 };
 
-export type CreateSoundscapeInput = {
-  id?: string | null,
-  name: string,
-  members: Array< string | null >,
+export type CreateSoundscapeMemberInput = {
+  userId: string,
+  soundscapeId: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
-export type ModelSoundscapeConditionInput = {
-  name?: ModelStringInput | null,
-  members?: ModelStringInput | null,
-  and?: Array< ModelSoundscapeConditionInput | null > | null,
-  or?: Array< ModelSoundscapeConditionInput | null > | null,
-  not?: ModelSoundscapeConditionInput | null,
+export type ModelSoundscapeMemberConditionInput = {
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSoundscapeMemberConditionInput | null > | null,
+  or?: Array< ModelSoundscapeMemberConditionInput | null > | null,
+  not?: ModelSoundscapeMemberConditionInput | null,
+};
+
+export type SoundscapeMember = {
+  __typename: "SoundscapeMember",
+  userId: string,
+  soundscapeId: string,
+  user?: User | null,
+  soundscape?: Soundscape | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type User = {
+  __typename: "User",
+  spotifyId: string,
+  displayName: string,
+  spotifyAccessToken: string,
+  soundscapes?: ModelSoundscapeMemberConnection | null,
+  topTrackIds: Array< string >,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelSoundscapeMemberConnection = {
+  __typename: "ModelSoundscapeMemberConnection",
+  items:  Array<SoundscapeMember | null >,
+  nextToken?: string | null,
 };
 
 export type Soundscape = {
   __typename: "Soundscape",
   id: string,
   name: string,
-  members: Array< string | null >,
+  members?: ModelSoundscapeMemberConnection | null,
   createdAt: string,
   updatedAt: string,
+};
+
+export type UpdateSoundscapeMemberInput = {
+  userId: string,
+  soundscapeId: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteSoundscapeMemberInput = {
+  userId: string,
+  soundscapeId: string,
+};
+
+export type CreateSoundscapeInput = {
+  id?: string | null,
+  name: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelSoundscapeConditionInput = {
+  id?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSoundscapeConditionInput | null > | null,
+  or?: Array< ModelSoundscapeConditionInput | null > | null,
+  not?: ModelSoundscapeConditionInput | null,
 };
 
 export type UpdateSoundscapeInput = {
   id: string,
   name?: string | null,
-  members?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type DeleteSoundscapeInput = {
@@ -125,53 +189,51 @@ export type DeleteSoundscapeInput = {
 };
 
 export type CreateUserInput = {
-  id?: string | null,
   spotifyId: string,
   displayName: string,
   spotifyAccessToken: string,
+  topTrackIds: Array< string >,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type ModelUserConditionInput = {
-  spotifyId?: ModelStringInput | null,
   displayName?: ModelStringInput | null,
   spotifyAccessToken?: ModelStringInput | null,
+  topTrackIds?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
 };
 
-export type User = {
-  __typename: "User",
-  id: string,
-  spotifyId: string,
-  displayName: string,
-  spotifyAccessToken: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
 export type UpdateUserInput = {
-  id: string,
-  spotifyId?: string | null,
+  spotifyId: string,
   displayName?: string | null,
   spotifyAccessToken?: string | null,
+  topTrackIds?: Array< string > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type DeleteUserInput = {
-  id: string,
+  spotifyId: string,
 };
 
-export type ModelSeedSongFilterInput = {
+export type ModelSeedTrackFilterInput = {
   key?: ModelStringInput | null,
   spotifyId?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
   soundscapeId?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
   name?: ModelStringInput | null,
   artists?: ModelStringInput | null,
   thumbnailUrl?: ModelStringInput | null,
-  and?: Array< ModelSeedSongFilterInput | null > | null,
-  or?: Array< ModelSeedSongFilterInput | null > | null,
-  not?: ModelSeedSongFilterInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSeedTrackFilterInput | null > | null,
+  or?: Array< ModelSeedTrackFilterInput | null > | null,
+  not?: ModelSeedTrackFilterInput | null,
 };
 
 export enum ModelSortDirection {
@@ -180,35 +242,40 @@ export enum ModelSortDirection {
 }
 
 
-export type ModelSeedSongConnection = {
-  __typename: "ModelSeedSongConnection",
-  items:  Array<SeedSong | null >,
+export type ModelSeedTrackConnection = {
+  __typename: "ModelSeedTrackConnection",
+  items:  Array<SeedTrack | null >,
   nextToken?: string | null,
 };
 
-export type ModelSoundscapeFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  members?: ModelStringInput | null,
-  and?: Array< ModelSoundscapeFilterInput | null > | null,
-  or?: Array< ModelSoundscapeFilterInput | null > | null,
-  not?: ModelSoundscapeFilterInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
+export type ModelStringKeyConditionInput = {
   eq?: string | null,
   le?: string | null,
   lt?: string | null,
   ge?: string | null,
   gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
   between?: Array< string | null > | null,
   beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
+};
+
+export type ModelSoundscapeMemberFilterInput = {
+  userId?: ModelStringInput | null,
+  soundscapeId?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSoundscapeMemberFilterInput | null > | null,
+  or?: Array< ModelSoundscapeMemberFilterInput | null > | null,
+  not?: ModelSoundscapeMemberFilterInput | null,
+};
+
+export type ModelSoundscapeFilterInput = {
+  id?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSoundscapeFilterInput | null > | null,
+  or?: Array< ModelSoundscapeFilterInput | null > | null,
+  not?: ModelSoundscapeFilterInput | null,
 };
 
 export type ModelSoundscapeConnection = {
@@ -218,10 +285,12 @@ export type ModelSoundscapeConnection = {
 };
 
 export type ModelUserFilterInput = {
-  id?: ModelIDInput | null,
   spotifyId?: ModelStringInput | null,
   displayName?: ModelStringInput | null,
   spotifyAccessToken?: ModelStringInput | null,
+  topTrackIds?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -233,16 +302,18 @@ export type ModelUserConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionSeedSongFilterInput = {
+export type ModelSubscriptionSeedTrackFilterInput = {
   key?: ModelSubscriptionStringInput | null,
   spotifyId?: ModelSubscriptionStringInput | null,
-  userId?: ModelSubscriptionStringInput | null,
   soundscapeId?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
   artists?: ModelSubscriptionStringInput | null,
   thumbnailUrl?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSeedSongFilterInput | null > | null,
-  or?: Array< ModelSubscriptionSeedSongFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionSeedTrackFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSeedTrackFilterInput | null > | null,
 };
 
 export type ModelSubscriptionStringInput = {
@@ -260,50 +331,47 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionSoundscapeMemberFilterInput = {
+  userId?: ModelSubscriptionStringInput | null,
+  soundscapeId?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionSoundscapeMemberFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSoundscapeMemberFilterInput | null > | null,
+};
+
 export type ModelSubscriptionSoundscapeFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
+  id?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
-  members?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionSoundscapeFilterInput | null > | null,
   or?: Array< ModelSubscriptionSoundscapeFilterInput | null > | null,
 };
 
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
 export type ModelSubscriptionUserFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
   spotifyId?: ModelSubscriptionStringInput | null,
   displayName?: ModelSubscriptionStringInput | null,
   spotifyAccessToken?: ModelSubscriptionStringInput | null,
+  topTrackIds?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
 
-export type CreateSeedSongMutationVariables = {
-  input: CreateSeedSongInput,
-  condition?: ModelSeedSongConditionInput | null,
+export type CreateSeedTrackMutationVariables = {
+  input: CreateSeedTrackInput,
+  condition?: ModelSeedTrackConditionInput | null,
 };
 
-export type CreateSeedSongMutation = {
-  createSeedSong?:  {
-    __typename: "SeedSong",
+export type CreateSeedTrackMutation = {
+  createSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
@@ -312,18 +380,18 @@ export type CreateSeedSongMutation = {
   } | null,
 };
 
-export type UpdateSeedSongMutationVariables = {
-  input: UpdateSeedSongInput,
-  condition?: ModelSeedSongConditionInput | null,
+export type UpdateSeedTrackMutationVariables = {
+  input: UpdateSeedTrackInput,
+  condition?: ModelSeedTrackConditionInput | null,
 };
 
-export type UpdateSeedSongMutation = {
-  updateSeedSong?:  {
-    __typename: "SeedSong",
+export type UpdateSeedTrackMutation = {
+  updateSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
@@ -332,21 +400,138 @@ export type UpdateSeedSongMutation = {
   } | null,
 };
 
-export type DeleteSeedSongMutationVariables = {
-  input: DeleteSeedSongInput,
-  condition?: ModelSeedSongConditionInput | null,
+export type DeleteSeedTrackMutationVariables = {
+  input: DeleteSeedTrackInput,
+  condition?: ModelSeedTrackConditionInput | null,
 };
 
-export type DeleteSeedSongMutation = {
-  deleteSeedSong?:  {
-    __typename: "SeedSong",
+export type DeleteSeedTrackMutation = {
+  deleteSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSoundscapeMemberMutationVariables = {
+  input: CreateSoundscapeMemberInput,
+  condition?: ModelSoundscapeMemberConditionInput | null,
+};
+
+export type CreateSoundscapeMemberMutation = {
+  createSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSoundscapeMemberMutationVariables = {
+  input: UpdateSoundscapeMemberInput,
+  condition?: ModelSoundscapeMemberConditionInput | null,
+};
+
+export type UpdateSoundscapeMemberMutation = {
+  updateSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSoundscapeMemberMutationVariables = {
+  input: DeleteSoundscapeMemberInput,
+  condition?: ModelSoundscapeMemberConditionInput | null,
+};
+
+export type DeleteSoundscapeMemberMutation = {
+  deleteSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -362,7 +547,17 @@ export type CreateSoundscapeMutation = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -378,7 +573,17 @@ export type UpdateSoundscapeMutation = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -394,7 +599,17 @@ export type DeleteSoundscapeMutation = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -408,10 +623,21 @@ export type CreateUserMutationVariables = {
 export type CreateUserMutation = {
   createUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -425,10 +651,21 @@ export type UpdateUserMutationVariables = {
 export type UpdateUserMutation = {
   updateUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -442,26 +679,37 @@ export type DeleteUserMutationVariables = {
 export type DeleteUserMutation = {
   deleteUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetSeedSongQueryVariables = {
+export type GetSeedTrackQueryVariables = {
   key: string,
 };
 
-export type GetSeedSongQuery = {
-  getSeedSong?:  {
-    __typename: "SeedSong",
+export type GetSeedTrackQuery = {
+  getSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
@@ -470,26 +718,104 @@ export type GetSeedSongQuery = {
   } | null,
 };
 
-export type ListSeedSongsQueryVariables = {
+export type ListSeedTracksQueryVariables = {
   key?: string | null,
-  filter?: ModelSeedSongFilterInput | null,
+  filter?: ModelSeedTrackFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   sortDirection?: ModelSortDirection | null,
 };
 
-export type ListSeedSongsQuery = {
-  listSeedSongs?:  {
-    __typename: "ModelSeedSongConnection",
+export type ListSeedTracksQuery = {
+  listSeedTracks?:  {
+    __typename: "ModelSeedTrackConnection",
     items:  Array< {
-      __typename: "SeedSong",
+      __typename: "SeedTrack",
       key: string,
       spotifyId: string,
-      userId: string,
       soundscapeId: string,
+      userId: string,
       name: string,
       artists: Array< string >,
       thumbnailUrl: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetSoundscapeMemberQueryVariables = {
+  userId: string,
+  soundscapeId: string,
+};
+
+export type GetSoundscapeMemberQuery = {
+  getSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSoundscapeMembersQueryVariables = {
+  userId?: string | null,
+  soundscapeId?: ModelStringKeyConditionInput | null,
+  filter?: ModelSoundscapeMemberFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListSoundscapeMembersQuery = {
+  listSoundscapeMembers?:  {
+    __typename: "ModelSoundscapeMemberConnection",
+    items:  Array< {
+      __typename: "SoundscapeMember",
+      userId: string,
+      soundscapeId: string,
+      user?:  {
+        __typename: "User",
+        spotifyId: string,
+        displayName: string,
+        spotifyAccessToken: string,
+        topTrackIds: Array< string >,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      soundscape?:  {
+        __typename: "Soundscape",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -506,7 +832,17 @@ export type GetSoundscapeQuery = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -525,7 +861,10 @@ export type ListSoundscapesQuery = {
       __typename: "Soundscape",
       id: string,
       name: string,
-      members: Array< string | null >,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -534,25 +873,38 @@ export type ListSoundscapesQuery = {
 };
 
 export type GetUserQueryVariables = {
-  id: string,
+  spotifyId: string,
 };
 
 export type GetUserQuery = {
   getUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type ListUsersQueryVariables = {
+  spotifyId?: string | null,
   filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListUsersQuery = {
@@ -560,10 +912,14 @@ export type ListUsersQuery = {
     __typename: "ModelUserConnection",
     items:  Array< {
       __typename: "User",
-      id: string,
       spotifyId: string,
       displayName: string,
       spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -571,17 +927,84 @@ export type ListUsersQuery = {
   } | null,
 };
 
-export type OnCreateSeedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSeedSongFilterInput | null,
+export type SeedTracksBySoundscapeIdAndUserIdQueryVariables = {
+  soundscapeId: string,
+  userId?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelSeedTrackFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnCreateSeedSongSubscription = {
-  onCreateSeedSong?:  {
-    __typename: "SeedSong",
+export type SeedTracksBySoundscapeIdAndUserIdQuery = {
+  seedTracksBySoundscapeIdAndUserId?:  {
+    __typename: "ModelSeedTrackConnection",
+    items:  Array< {
+      __typename: "SeedTrack",
+      key: string,
+      spotifyId: string,
+      soundscapeId: string,
+      userId: string,
+      name: string,
+      artists: Array< string >,
+      thumbnailUrl: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SoundscapeMemberBySoundscapeIdQueryVariables = {
+  soundscapeId: string,
+  userId?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelSoundscapeMemberFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type SoundscapeMemberBySoundscapeIdQuery = {
+  soundscapeMemberBySoundscapeId?:  {
+    __typename: "ModelSoundscapeMemberConnection",
+    items:  Array< {
+      __typename: "SoundscapeMember",
+      userId: string,
+      soundscapeId: string,
+      user?:  {
+        __typename: "User",
+        spotifyId: string,
+        displayName: string,
+        spotifyAccessToken: string,
+        topTrackIds: Array< string >,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      soundscape?:  {
+        __typename: "Soundscape",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateSeedTrackSubscriptionVariables = {
+  filter?: ModelSubscriptionSeedTrackFilterInput | null,
+};
+
+export type OnCreateSeedTrackSubscription = {
+  onCreateSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
@@ -590,17 +1013,17 @@ export type OnCreateSeedSongSubscription = {
   } | null,
 };
 
-export type OnUpdateSeedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSeedSongFilterInput | null,
+export type OnUpdateSeedTrackSubscriptionVariables = {
+  filter?: ModelSubscriptionSeedTrackFilterInput | null,
 };
 
-export type OnUpdateSeedSongSubscription = {
-  onUpdateSeedSong?:  {
-    __typename: "SeedSong",
+export type OnUpdateSeedTrackSubscription = {
+  onUpdateSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
@@ -609,20 +1032,134 @@ export type OnUpdateSeedSongSubscription = {
   } | null,
 };
 
-export type OnDeleteSeedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSeedSongFilterInput | null,
+export type OnDeleteSeedTrackSubscriptionVariables = {
+  filter?: ModelSubscriptionSeedTrackFilterInput | null,
 };
 
-export type OnDeleteSeedSongSubscription = {
-  onDeleteSeedSong?:  {
-    __typename: "SeedSong",
+export type OnDeleteSeedTrackSubscription = {
+  onDeleteSeedTrack?:  {
+    __typename: "SeedTrack",
     key: string,
     spotifyId: string,
-    userId: string,
     soundscapeId: string,
+    userId: string,
     name: string,
     artists: Array< string >,
     thumbnailUrl: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSoundscapeMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionSoundscapeMemberFilterInput | null,
+};
+
+export type OnCreateSoundscapeMemberSubscription = {
+  onCreateSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSoundscapeMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionSoundscapeMemberFilterInput | null,
+};
+
+export type OnUpdateSoundscapeMemberSubscription = {
+  onUpdateSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSoundscapeMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionSoundscapeMemberFilterInput | null,
+};
+
+export type OnDeleteSoundscapeMemberSubscription = {
+  onDeleteSoundscapeMember?:  {
+    __typename: "SoundscapeMember",
+    userId: string,
+    soundscapeId: string,
+    user?:  {
+      __typename: "User",
+      spotifyId: string,
+      displayName: string,
+      spotifyAccessToken: string,
+      soundscapes?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      topTrackIds: Array< string >,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    soundscape?:  {
+      __typename: "Soundscape",
+      id: string,
+      name: string,
+      members?:  {
+        __typename: "ModelSoundscapeMemberConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -637,7 +1174,17 @@ export type OnCreateSoundscapeSubscription = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -652,7 +1199,17 @@ export type OnUpdateSoundscapeSubscription = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -667,7 +1224,17 @@ export type OnDeleteSoundscapeSubscription = {
     __typename: "Soundscape",
     id: string,
     name: string,
-    members: Array< string | null >,
+    members?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -680,10 +1247,21 @@ export type OnCreateUserSubscriptionVariables = {
 export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -696,10 +1274,21 @@ export type OnUpdateUserSubscriptionVariables = {
 export type OnUpdateUserSubscription = {
   onUpdateUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -712,10 +1301,21 @@ export type OnDeleteUserSubscriptionVariables = {
 export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
-    id: string,
     spotifyId: string,
     displayName: string,
     spotifyAccessToken: string,
+    soundscapes?:  {
+      __typename: "ModelSoundscapeMemberConnection",
+      items:  Array< {
+        __typename: "SoundscapeMember",
+        userId: string,
+        soundscapeId: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    topTrackIds: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -1,4 +1,5 @@
 import { updateSelectedSoundscape } from '../../shared';
+import { createSeedTrack } from '../../../graphql-api';
 
 
 export default function funcAddSeedSong({
@@ -11,17 +12,24 @@ export default function funcAddSeedSong({
   const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
   const user = state.user;
 
-  return useCallback((song) => {
+  return useCallback(async (track) => {
     const newSoundscape = {
       ...selectedSoundscape,
-      seedSongs: [
-        ...selectedSoundscape.seedSongs,
+      seedTracks: [
+        ...selectedSoundscape.seedTracks,
         {
-          ...song,
+          ...track,
           addedBy: user.name
         }
       ],
     };
+
+    await createSeedTrack({
+      key: `${track.id}_${user.id}_${selectedSoundscape.id}`,
+      spotifyId: track.id,
+      userId: user.id,
+      soundscapeId: selectedSoundscape.id,
+    });
 
     updateSelectedSoundscape(
       soundscapes,

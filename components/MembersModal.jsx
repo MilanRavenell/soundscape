@@ -15,7 +15,7 @@ const Member = ({
             />
             <View style={styles.memberInfo}>
                 <Text style={styles.name}>
-                    {member.name}
+                    {member.displayName}
                 </Text>
             </View>
         </View>

@@ -1,9 +1,13 @@
-type SeedSong @model {
+type SeedTrack
+@model
+@auth(rules: [
+  { allow: public },
+]) {
   key: String! @primaryKey #<spotifyId>_<userId>_<soundscapeId>
   spotifyId: String!
+  soundscapeId: String! @index(name: "BySoundscapeIdAndUserId", sortKeyFields: ["userId"], queryField: "seedTracksBySoundscapeIdAndUserId")
   userId: String!
-  soundscapeId: String!
-  name: String!
-  artists: [String!]!
-  thumbnailUrl: String!
+  user: User @hasOne(fields: ["userId"])
+  createdAt: String!
+  updatedAt: String!
 }

@@ -12,16 +12,16 @@ export default function funcOnQueuedSongPressed({
   const spotifyAccessToken = state.spotifyAccessToken;
 
   return useCallback(async (song) => {
-    const songIndex = selectedSoundscape.queueSongs.findIndex(({ id }) => id === song.id);
+    const songIndex = selectedSoundscape.queueTracks.findIndex(({ id }) => id === song.id);
 
-    const curTracks = selectedSoundscape.queueSongs.slice(songIndex);
+    const curTracks = selectedSoundscape.queueTracks.slice(songIndex);
 
     await play(curTracks, null, spotifyAccessToken, setState);
     updateSelectedSoundscape(
       soundscapes,
       selectedSoundscapeIndex,
       {
-        queueSongs: curTracks,
+        queueTracks: curTracks,
       },
       setState,
     );

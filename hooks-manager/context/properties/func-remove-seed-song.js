@@ -1,4 +1,5 @@
 import { updateSelectedSoundscape } from '../../shared';
+import { deleteSeedTrack } from '../../../graphql-api';
 
 export default function funcRemoveSeedSong({
   state,
@@ -10,15 +11,19 @@ export default function funcRemoveSeedSong({
   const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
   const user = state.user;
 
-  return useCallback((song) => {
-    const newSeedSongs = [...selectedSoundscape.seedSongs];
-    const songToDeleteIndex = newSeedSongs.findIndex(({ id }) => id === song.id);
+  return useCallback(async (track) => {
+    const newSeedSongs = [...selectedSoundscape.seedTrackss];
+    const songToDeleteIndex = newSeedSongs.findIndex(({ id }) => id === track.id);
     newSeedSongs.splice(songToDeleteIndex, 1);
 
     const newSoundscape = {
       ...selectedSoundscape,
-      seedSongs: newSeedSongs,
+      seedTrackss: newSeedSongs,
     };
+
+    await deleteSeedTrack({
+      key: `${track.id}_${user.id}_${selectedSoundscape.id}`,
+    });
 
     updateSelectedSoundscape(
       soundscapes,

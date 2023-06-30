@@ -16,14 +16,14 @@ export default function funcOnPlayPressed({
     console.log('play pressed')
     if (
       !selectedSoundscape ||
-      !selectedSoundscape.queueSongs ||
-      selectedSoundscape.queueSongs.length === 0
+      !selectedSoundscape.queueTracks ||
+      selectedSoundscape.queueTracks.length === 0
     ) {
       return;
     }
 
     if (!curPlayingTrack) {
-      const curTracks = [...selectedSoundscape.queueSongs];
+      const curTracks = [...selectedSoundscape.queueTracks];
       play(curTracks, null, spotifyAccessToken, setState);
       return;
     }

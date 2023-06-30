@@ -25,7 +25,7 @@ export default function funcRegenerateSongs({
       soundscapes,
       selectedSoundscapeIndex,
       {
-        queueSongs: newTracks,
+        queueTracks: newTracks,
       },
       setState,
     );

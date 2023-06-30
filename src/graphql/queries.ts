@@ -2,13 +2,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getSeedSong = /* GraphQL */ `
-  query GetSeedSong($key: String!) {
-    getSeedSong(key: $key) {
+export const getSeedTrack = /* GraphQL */ `
+  query GetSeedTrack($key: String!) {
+    getSeedTrack(key: $key) {
       key
       spotifyId
-      userId
       soundscapeId
+      userId
       name
       artists
       thumbnailUrl
@@ -17,15 +17,15 @@ export const getSeedSong = /* GraphQL */ `
     }
   }
 `;
-export const listSeedSongs = /* GraphQL */ `
-  query ListSeedSongs(
+export const listSeedTracks = /* GraphQL */ `
+  query ListSeedTracks(
     $key: String
-    $filter: ModelSeedSongFilterInput
+    $filter: ModelSeedTrackFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listSeedSongs(
+    listSeedTracks(
       key: $key
       filter: $filter
       limit: $limit
@@ -35,11 +35,82 @@ export const listSeedSongs = /* GraphQL */ `
       items {
         key
         spotifyId
-        userId
         soundscapeId
+        userId
         name
         artists
         thumbnailUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getSoundscapeMember = /* GraphQL */ `
+  query GetSoundscapeMember($userId: String!, $soundscapeId: String!) {
+    getSoundscapeMember(userId: $userId, soundscapeId: $soundscapeId) {
+      userId
+      soundscapeId
+      user {
+        spotifyId
+        displayName
+        spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      soundscape {
+        id
+        name
+        members {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSoundscapeMembers = /* GraphQL */ `
+  query ListSoundscapeMembers(
+    $userId: String
+    $soundscapeId: ModelStringKeyConditionInput
+    $filter: ModelSoundscapeMemberFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listSoundscapeMembers(
+      userId: $userId
+      soundscapeId: $soundscapeId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        userId
+        soundscapeId
+        user {
+          spotifyId
+          displayName
+          spotifyAccessToken
+          topTrackIds
+          createdAt
+          updatedAt
+        }
+        soundscape {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -52,7 +123,15 @@ export const getSoundscape = /* GraphQL */ `
     getSoundscape(id: $id) {
       id
       name
-      members
+      members {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -68,7 +147,9 @@ export const listSoundscapes = /* GraphQL */ `
       items {
         id
         name
-        members
+        members {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -77,12 +158,21 @@ export const listSoundscapes = /* GraphQL */ `
   }
 `;
 export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
+  query GetUser($spotifyId: String!) {
+    getUser(spotifyId: $spotifyId) {
       spotifyId
       displayName
       spotifyAccessToken
+      soundscapes {
+        items {
+          userId
+          soundscapeId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      topTrackIds
       createdAt
       updatedAt
     }
@@ -90,16 +180,100 @@ export const getUser = /* GraphQL */ `
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
+    $spotifyId: String
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(
+      spotifyId: $spotifyId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
         spotifyId
         displayName
         spotifyAccessToken
+        soundscapes {
+          nextToken
+        }
+        topTrackIds
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const seedTracksBySoundscapeIdAndUserId = /* GraphQL */ `
+  query SeedTracksBySoundscapeIdAndUserId(
+    $soundscapeId: String!
+    $userId: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSeedTrackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    seedTracksBySoundscapeIdAndUserId(
+      soundscapeId: $soundscapeId
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        key
+        spotifyId
+        soundscapeId
+        userId
+        name
+        artists
+        thumbnailUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const soundscapeMemberBySoundscapeId = /* GraphQL */ `
+  query SoundscapeMemberBySoundscapeId(
+    $soundscapeId: String!
+    $userId: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSoundscapeMemberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    soundscapeMemberBySoundscapeId(
+      soundscapeId: $soundscapeId
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        userId
+        soundscapeId
+        user {
+          spotifyId
+          displayName
+          spotifyAccessToken
+          topTrackIds
+          createdAt
+          updatedAt
+        }
+        soundscape {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

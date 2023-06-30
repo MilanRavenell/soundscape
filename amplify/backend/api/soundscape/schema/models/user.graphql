@@ -1,6 +1,15 @@
-type User @model {
-  id: ID!
-  spotifyId: String!
+type User
+@model
+@auth(rules: [
+  { allow: public },
+])
+{
+  spotifyId: String! @primaryKey
   displayName: String!
   spotifyAccessToken: String!
+  soundscapes: [SoundscapeMember!] @hasMany(fields: ["spotifyId"])
+  topTrackIds: [String!]!
+  profPicUrl: String!
+  createdAt: String!
+  updatedAt: String!
 }

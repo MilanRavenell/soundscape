@@ -1,32 +1,45 @@
+import { genTracks } from "../../shared";
+import { play, updateSelectedSoundscape } from '../../shared';
+
 // If there are less than 10 songs in the queue, generate more songs
 // until there are 30
 export default function refillQueueSongs({
   context,
   state,
   useEffect,
+  setState
 }) {
-  const selectedSoundscape = context.selectedSoundscape
-  const playTracks = context.playTracks;
-  const genTracks = context.genTracks;
-  const updateSelectedSoundscape = context.updateSelectedSoundscape;
+  const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
+  const soundscapes = state.soundscapes;
+  const selectedSoundscape = context.selectedSoundscape;
+  const spotifyAccessToken = state.spotifyAccessToken;
 
-  const queueSongs = selectedSoundscape?.queueSongs;
+  const queueTracks = selectedSoundscape?.queueTracks;
   useEffect(() => {
     (async () => {
-      if (queueSongs && queueSongs.length < 10) {
+      if (queueTracks && queueTracks.length < 10) {
         const newTracks = [
-          ...queueSongs,
-          ...(await genTracks(selectedSoundscape, 30 - queueSongs.length)),
+          ...queueTracks,
+          ...(await genTracks(selectedSoundscape, spotifyAccessToken, 30 - queueTracks.length)),
         ];
 
         console.log('lol: ', newTracks)
 
-        await playTracks(newTracks);
+        await play(
+          newTracks,
+          null,
+          spotifyAccessToken,
+          setState,
+        );
 
-        updateSelectedSoundscape({
-          queueSongs: newTracks,
-        });
+        updateSelectedSoundscape(
+          soundscapes,
+          selectedSoundscapeIndex,
+          {
+            queueTracks: newTracks,
+          },
+          setState);
       }
     })();
-  }, [queueSongs]);
+  }, [queueTracks]);
 }
