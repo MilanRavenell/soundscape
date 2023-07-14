@@ -1,9 +1,15 @@
 const initialState = {
+  editSoundscapeNameDialogOpen: false,
   spotifyAccessToken: null,
   searchedTracks: [],
   selectedTracks: [],
   generatedTracks: [],
   curPlayingTrack: null,
+  inviteError: false,
+  inviteLinkDialogOpen: false,
+  inviteSoundscape: null,
+  inviteSuccess: false,
+  inviteUser: null,
   isPaused: true,
   playerToggle: false,
   accessTokenValid: null,
@@ -14,10 +20,11 @@ const initialState = {
   addSeedSongsModalOpen: false,
   membersModalOpen: false,
   selectedSoundscapeIndex: null,
-  soundscapes: [],
+  soundscapes: null,
   loginDialogOpen: false,
   user: null,
   searchQuery: '',
+  storedSpotifyId: null,
 };
 
 export default initialState;

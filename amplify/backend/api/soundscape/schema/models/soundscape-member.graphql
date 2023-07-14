@@ -1,0 +1,12 @@
+type SoundscapeMember
+@model
+@auth(rules: [
+  { allow: public },
+]) {
+  userId: String! @primaryKey(sortKeyFields: ["soundscapeId"])
+  soundscapeId: String! @index(name: "BySoundscapeId", sortKeyFields: ["userId"], queryField: "soundscapeMemberBySoundscapeId")
+  user: User @hasOne(fields: ["userId"])
+  soundscape: Soundscape @hasOne(fields: ["soundscapeId"])
+  createdAt: String!
+  updatedAt: String!
+}

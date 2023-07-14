@@ -8,7 +8,7 @@ export default function funcOnQueuedSongPressed({
 }) {
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
   const soundscapes = state.soundscapes;
-  const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes ? soundscapes[selectedSoundscapeIndex] : null;
   const spotifyAccessToken = state.spotifyAccessToken;
 
   return useCallback(async (song) => {

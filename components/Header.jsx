@@ -11,7 +11,7 @@ const Header = ({
       <View style={styles.left}>
         {onBackPressed && (
           <Pressable onPress={onBackPressed}>
-            <AntDesign name="left" size={24} color="black" />
+            <AntDesign name="left" size={24} color="white" />
           </Pressable>
         )}
         <Text style={styles.title}>{title}</Text>
@@ -19,7 +19,7 @@ const Header = ({
       <View style={styles.right}>
         {onOptionsPress && (
           <Pressable style={styles.options} onPress={onOptionsPress}>
-            <AntDesign name="ellipsis1" size={40} color="black" />
+            <AntDesign name="ellipsis1" size={40} color="white" />
           </Pressable>
         )}
       </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: '20px',
+    marginBottom: '10px',
   },
   left: {
     display: 'flex',
@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   title: {
-    fontSize: '24px',
+    fontSize: '30px',
+    fontWeight: '700',
+    color:'white'
   }
 });
 

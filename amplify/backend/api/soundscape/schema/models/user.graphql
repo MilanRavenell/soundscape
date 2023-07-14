@@ -4,12 +4,14 @@ type User
   { allow: public },
 ])
 {
-  spotifyId: String! @primaryKey
-  displayName: String!
-  spotifyAccessToken: String!
-  soundscapes: [SoundscapeMember!] @hasMany(fields: ["spotifyId"])
-  topTrackIds: [String!]!
-  profPicUrl: String!
+  owner: String! @primaryKey
+  spotifyId: String @index(name: "BySpotifyId", queryField: "userBySpotifyId")
+  displayName: String
+  spotifyAccessToken: String
+  spotifyRefreshToken: String
+  soundscapes: [SoundscapeMember!] @hasMany(fields: ["owner"])
+  topTrackIds: [String!]
+  profPicUrl: String
   createdAt: String!
   updatedAt: String!
 }

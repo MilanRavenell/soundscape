@@ -1,0 +1,7 @@
+input RefreshSpotifyAccessTokenInput {
+    owner: String!
+}
+
+type RefreshSpotifyAccessTokenResponse {
+    accessToken: String
+}

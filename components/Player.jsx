@@ -1,20 +1,36 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Image, Text, View, Pressable, Button } from 'react-native';
+import { StyleSheet, Image, Text, View, Button } from 'react-native';
+import { Pressable } from '@react-native-material/core';
 
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const QueueView = ({
   songs,
   isActive,
   onSongPressed,
   onRegeneratePressed,
+  onSeedSongsPressed,
 }) => {
   return (
     <View style={styles.queueContainer}>
       <View style={styles.btns}>
-        <Pressable style={styles.regenerateBtn} onPress={onRegeneratePressed}>
-          <Text>Regenerate</Text>
+        <Pressable
+          style={styles.regenerateBtn}
+          onPress={onSeedSongsPressed}
+          pressEffect='ripple'
+        >
+          <FontAwesome5 name="seedling" size={16} color="white" />
+          <Text style={styles.regenerateBtnText}>Seed Songs</Text>
+        </Pressable>
+        <Pressable
+          style={styles.regenerateBtn}
+          onPress={onRegeneratePressed}
+          pressEffect='ripple'
+        >
+          <Entypo name="cycle" size={16} color="white" />
+          <Text style={styles.regenerateBtnText}>Regenerate</Text>
         </Pressable>
       </View>
       <View style={styles.songs}>
@@ -22,6 +38,7 @@ const QueueView = ({
           <Pressable
             style={styles.song}
             onPress={() => onSongPressed(song)}
+            pressEffect='ripple'
             key={index}
           >
             <Image style={styles.thumbnail} source={song.album.images[0].url} />
@@ -63,6 +80,7 @@ const Player = ({
   onNextPressed,
   onSongPressed,
   onRegeneratePressed,
+  onSeedSongsPressed
 }) => {
   const [view, setView] = useState('queue');
 
@@ -80,11 +98,12 @@ const Player = ({
               isActive={isActive}
               onSongPressed={onSongPressed}
               onRegeneratePressed={onRegeneratePressed}
+              onSeedSongsPressed={onSeedSongsPressed}
             />}
       </View>
       <View style={styles.buttons}>
         <View style={styles.view}>
-          <Pressable onPress={onViewPressed}>
+          <Pressable onPress={onViewPressed} pressEffect='ripple'>
             {(view === 'cur_song')
               ? <AntDesign name="bars" size={38} color="black" />
               : <Entypo name="image" size={38} color="black" />}
@@ -92,14 +111,22 @@ const Player = ({
         </View>
         <View style={styles.play}>
           <View style={styles.circleButtonContainer}>
-            <Pressable style={styles.circleButton} onPress={onPlayPressed}>
+            <Pressable
+              style={styles.circleButton}
+              onPress={onPlayPressed}
+              pressEffect='ripple'
+            >
               <AntDesign name={isPaused ? 'caretright' : 'pause'} size={38} color='#25292e' />
             </Pressable>
           </View>
         </View>
         <View style={styles.next}>
           <View style={styles.circleButtonContainer}>
-            <Pressable style={styles.circleButton} onPress={onNextPressed}>
+            <Pressable
+              style={styles.circleButton}
+              onPress={onNextPressed}
+              pressEffect='ripple'
+            >
               <AntDesign name='stepforward' size={38} color='#25292e' />
             </Pressable>
           </View>
@@ -118,6 +145,10 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     flex: 1,
+    backgroundColor: 'white',
+    filter: 'drop-shadow(0px 0px 4px gray)',
+    borderRadius: 15,
+    padding: 10,
   },
   curSongContainer: {
     width: '100%',
@@ -131,7 +162,6 @@ const styles = StyleSheet.create({
   coverImage: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'green',
   },
   titleLabel: {
     fontSize: '25px',
@@ -150,13 +180,17 @@ const styles = StyleSheet.create({
     marginTop: '10px',
     marginBottom: '10px',
     width: '100%',
+    backgroundColor: 'white',
+    filter: 'drop-shadow(0px 0px 4px gray)',
+    borderRadius: 15,
+    padding: 10,
 
   },
   circleButtonContainer: {
     width: 84,
     height: 84,
     borderWidth: 4,
-    borderColor: '#ffd33d',
+    borderColor: 'black',
     borderRadius: 42,
     padding: 3,
   },
@@ -196,11 +230,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginBottom: 5,
   },
   regenerateBtn: {
     padding: '10px',
-    backgroundColor: 'orange',
+    backgroundColor: 'black',
     borderRadius: '50px',
+    marginHorizontal: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  regenerateBtnText: {
+    marginLeft: 5,
+    color: 'white',
   },
   songs: {
     width: '100%',

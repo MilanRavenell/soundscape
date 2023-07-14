@@ -7,7 +7,7 @@ export default function funcOnPlayPressed({
 }) {
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
   const soundscapes = state.soundscapes;
-  const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes ? soundscapes[selectedSoundscapeIndex] : null;
   const isPaused = state.isPaused;
   const curPlayingTrack = state.curPlayingTrack;
   const spotifyAccessToken = state.spotifyAccessToken;

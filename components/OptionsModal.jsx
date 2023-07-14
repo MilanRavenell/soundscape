@@ -24,7 +24,7 @@ const Option = ({
 
 const OptionsModal = ({
     closeModal,
-    onSeedSongsPressed,
+    onEditSoundscapeNamePressed,
     onLeaveSoundscapePressed,
 }) => {
     return (
@@ -32,14 +32,9 @@ const OptionsModal = ({
             <View style={styles.container}>
                 <View style={styles.main}>
                     <Option
-                        title={'Seed Songs'}
-                        icon={<MaterialCommunityIcons name="seed" size={36} color="white" />}
-                        onPress={onSeedSongsPressed}
-                    />
-                    <Option
                         title={'Edit Soundscape Name'}
                         icon={<Entypo name="edit" size={36} color="white" />}
-                        onPress={()=>{}}
+                        onPress={onEditSoundscapeNamePressed}
                     />
                     <Option
                         title={'Leave Soundscape'}

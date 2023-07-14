@@ -7,20 +7,21 @@ export default function funcRegenerateSongs({
 }) {
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
   const soundscapes = state.soundscapes;
-  const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes ? soundscapes[selectedSoundscapeIndex] : null;
   const spotifyAccessToken = state.spotifyAccessToken;
 
   return useCallback(async () => {
     const newTracks = await genTracks(selectedSoundscape, spotifyAccessToken);
 
     setState('curPlayingTrack', newTracks[0]);
-    setState('isPaused', false);
-    await play(
-      newTracks,
-      null,
-      spotifyAccessToken,
-      setState,
-    );
+    setState('isPaused', true);
+    setState('active', false);
+    // await play(
+    //   newTracks,
+    //   null,
+    //   spotifyAccessToken,
+    //   setState,
+    // );
     updateSelectedSoundscape(
       soundscapes,
       selectedSoundscapeIndex,

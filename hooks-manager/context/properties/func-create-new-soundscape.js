@@ -20,19 +20,16 @@ export default function funcCreateNewSoundscape({
       queueTracks: [],
     };
 
-    await createSoundscape({
-      id: newSoundscape.id,
-      name: newSoundscape.name,
-    });
-
-    await createSoundscapeMember({
-      userId: user.id,
-      soundscapeId: newSoundscape.id,
-    })
-
-
     newSoundscape.queueTracks = await genTracks(newSoundscape, spotifyAccessToken);
     console.log('newSoundscape: ', newSoundscape);
+
+    newSoundscape.coverTrackUrls = user.topTracks
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value.album.images[0].url)
+      .slice(0,4);
+
+    console.log('newSoundscape:', newSoundscape);
 
     const newSoundscapes = [
       ...soundscapes,
@@ -41,5 +38,16 @@ export default function funcCreateNewSoundscape({
 
     setState('soundscapes', newSoundscapes);
     setState('selectedSoundscapeIndex', newSoundscapes.length - 1);
+
+    await createSoundscape({
+      id: newSoundscape.id,
+      name: newSoundscape.name,
+      coverTrackUrls: newSoundscape.coverTrackUrls,
+    });
+
+    await createSoundscapeMember({
+      userId: user.owner,
+      soundscapeId: newSoundscape.id,
+    })
   }, [soundscapes, user, spotifyAccessToken, setState]);
 }

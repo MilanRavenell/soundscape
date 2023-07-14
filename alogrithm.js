@@ -3,7 +3,7 @@ import rateLimit from 'axios-rate-limit';
 
 const http = rateLimit(
   axios.create(),
-  { maxRequests: 10000, perMilliseconds: 500, maxRPS: 2 }
+  { maxRequests: 5000, perMilliseconds: 100, maxRPS: 2 }
 );
 
 const theAlgorithm = async (seedSongs, topTrackIds, limit, accessToken) => {
@@ -21,7 +21,7 @@ const theAlgorithm = async (seedSongs, topTrackIds, limit, accessToken) => {
     )).data;
 
     return [
-      ...response.tracks.slice(0, source === 'seed' ? 10 : 2),
+      ...response.tracks.slice(0, source === 'seed' ? 80 : 2),
       song,
     ]
   })))

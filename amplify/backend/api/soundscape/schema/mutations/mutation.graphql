@@ -1,0 +1,4 @@
+type Mutation {
+    handleSpotifyAuthCode(input: HandleSpotifyAuthCodeInput!): HandleSpotifyAuthCodeResponse! @function(name: "coreResolver-${env}", region: "us-west-2") @auth(rules: [{ allow: public }])
+    refreshSpotifyAccessToken(input: RefreshSpotifyAccessTokenInput!): RefreshSpotifyAccessTokenResponse! @function(name: "coreResolver-${env}", region: "us-west-2") @auth(rules: [{ allow: public }])
+}

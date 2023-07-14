@@ -15,7 +15,11 @@
       "function": {
         "coreResolver": {
           "deploymentBucketName": "amplify-soundscape-staging-05511-deployment",
-          "s3Key": "amplify-builds/coreResolver-366a4a5457466c314e67-build.zip"
+          "s3Key": "amplify-builds/coreResolver-45596737343352373552-build.zip",
+          "spotifyClientId": "43bfe982f35949b793aa78aac13b784b",
+          "spotifyClientSecret": "0867681fab8d40a9baf736afd4b659f4",
+          "appsyncApiId": "jshorba4tvd5lek4xqhhvaejtq",
+          "env": "staging"
         }
       },
       "api": {

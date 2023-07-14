@@ -1,0 +1,51 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "refreshSpotifyAccessToken",
+  "arguments": {
+    "input": {
+      "code": "AQCUjuiM7Xq5u_DlzhhIrATxDwMUzLfdMx7JbmZGki4u_7Jv7ThV8AM3lXEGMN5SqGSYBVYaqKWtn1svA65Mua4opQaMaTssWs8KzmFI3n5f9s3efJ5v8w9y9hJ42Udu7o67tLPmEZ1ZCVXOPZDijBj7mZya_o9bUlKQUsy8lP5zYqRuibGURa56DCpyjS-jesxgPuzbEn63Jn02X7hu5BoIvc1q35CAqhVh5YRdZ6WN1tyQ6HJKUyY5XRDqkXsqmOTfPHJxJaA9j72ZU9Uq_9BLziljJvmGYStha19wgT3Tt0_QuCMB9ZkuR03ZcuuFhTzscGh5lg",
+      "redirectUri": "http://localhost:19000",
+      "spotifyId": "mravenell89",
+      "title": "EMTEC 1 GB 60x SD Flash Memory Card with USB 2.0 Card Reader",
+      "descriptions":  [
+        "USB SD card reader",
+        "Includes 1GB SD card",
+        "USB 2.0",
+        "Supported memory cards: SD, SDHC, SD-Ultra, Mini SD, MMC, HS-MMC, RS-MMC, T-flash",
+        "Use your SD memory card as a flash drive"
+      ],
+      "images": [
+        "https://m.media-amazon.com/images/I/71VWzf7beXL._AC_SL1500_.jpg"
+      ],
+      "owner": "9f033388-2584-4e2f-8400-c8dd43064d46",
+      "imageUrl": "https://m.media-amazon.com/images/I/81UVYBpBcbL._SL1500_.jpg",
+      "id": "hiii",
+      "userMessages": ["Can you give me an ad?", "Yes", "Thank you sir"],
+      "iteration": 1
+    }
+  },
+  "identity": {
+    "claims": {
+      "username": "4dd5d5d5-babc-4a70-8631-9d79a9c6cac4"
+    }
+  },
+  "LOCAL_ENVVARS": {
+    "SPOTIFY_CLIENT_ID": "43bfe982f35949b793aa78aac13b784b",
+    "SPOTIFY_CLIENT_SECRET": "0867681fab8d40a9baf736afd4b659f4",
+    "APPSYNC_API_ID": "jh7xxjxyarcr5m4zwkvh4iccvi",
+    "ENV": "staging",
+    "WEB_SCRAPER_LAMBDA_NAME": "web-scraper-js-service-staging-scrape",
+    "CLIPDROP_API_KEY": "16e36c7b33f6d7491f01b870f026f1c86671e0794c1b8d54d4e910c1ceb4c1db54e680e94a326411e5b25032a670fedc",
+    "BUCKET_NAME": "amazonautoadswebapp103c36f7e3dc4820afc076187553214306-staging",
+    "BUCKET_URL": "https://amazonautoadswebapp103c36f7e3dc4820afc076187553214306-staging.s3.amazonaws.com",
+    "META_MARKETING_ACCESS_TOKEN": "EAADKYUK8U50BAGcIxBf5RrOBSI8ZByuuwBzZB6yrCnloty7AWq4XdpkPgkoQW0IqsXMYFU03dPSTXBhpXDqmLw8lsgosr7BCVIfqM5ZCU8Q6iM2PfBW15LZBcfOPfIUeG7Rl37wZCrXazcmXvWHKqzw4gK99v2KC1w6nXbTLAZAUJ3sY9SwtnNzftjYT1YygptYO9oZCQadqwZDZD",
+    "SELLING_PARTNER_APP_CLIENT_ID": "amzn1.application-oa2-client.2f96cbbc985446b3bd11db32d0b26492",
+    "SELLING_PARTNER_APP_CLIENT_SECRET": "e09e9597199515805119fbda9b48cd2c07439fdebe10d94d2706b0539b0d787d",
+    "AWS_SELLING_PARTNER_ACCESS_KEY_ID": "AKIAQLMOEF64RT6XNKEW",
+    "AWS_SELLING_PARTNER_SECRET_ACCESS_KEY": "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",
+    "AWS_SELLING_PARTNER_ROLE": "arn:aws:iam::024457260985:role/SellingPartnerApiRole",
+    "AWS_SESSION_TOKEN": "",
+    "GENERATE_AD_CREATIVE_QUEUE_URL": "https://sqs.us-west-2.amazonaws.com/024457260985/generate-ad-creative-queue-staging",
+    "_X_AMZN_TRACE_ID_disabled": "Root=1-63b6ffe7-2c48b4e36086hhhf21d16c8c;Parent=51740oo32a9d2e68;Sampled=0"
+  }
+}

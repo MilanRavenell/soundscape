@@ -13,7 +13,7 @@ export default function getPlaybackState({
   const activated = state.activated;
   const soundscapes = state.soundscapes;
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
-  const selectedSoundscape = state.soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes ? soundscapes[selectedSoundscapeIndex] : null;
   const playerToggle = state.playerToggle;
 
   useEffect(() => {

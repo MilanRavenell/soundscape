@@ -15,6 +15,15 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "spotifyClientId": {
+      "Type": "String"
+    },
+    "spotifyClientSecret": {
+      "Type": "String"
+    },
+    "appsyncApiId": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -69,6 +78,15 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "SPOTIFY_CLIENT_ID": {
+              "Ref": "spotifyClientId"
+            },
+            "SPOTIFY_CLIENT_SECRET": {
+              "Ref": "spotifyClientSecret"
+            },
+            "APPSYNC_API_ID": {
+              "Ref": "appsyncApiId"
             }
           }
         },
@@ -156,6 +174,25 @@
                     },
                     "lambda": {
                       "Ref": "LambdaFunction"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:*"
+              ],
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:dynamodb:${region}:${account}:table/*-jshorba4tvd5lek4xqhhvaejtq-staging*",
+                  {
+                    "region": {
+                      "Ref": "AWS::Region"
+                    },
+                    "account": {
+                      "Ref": "AWS::AccountId"
                     }
                   }
                 ]

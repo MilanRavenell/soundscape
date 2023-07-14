@@ -1,0 +1,9 @@
+input HandleSpotifyAuthCodeInput {
+    code: String!
+    redirectUri: String!
+}
+
+type HandleSpotifyAuthCodeResponse {
+    accessToken: String
+    user: User
+}

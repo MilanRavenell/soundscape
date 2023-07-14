@@ -9,7 +9,7 @@ export default function funcAddSeedSong({
 }) {
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
   const soundscapes = state.soundscapes;
-  const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes ? soundscapes[selectedSoundscapeIndex] : null;
   const user = state.user;
 
   return useCallback(async (track) => {
@@ -27,7 +27,7 @@ export default function funcAddSeedSong({
     await createSeedTrack({
       key: `${track.id}_${user.id}_${selectedSoundscape.id}`,
       spotifyId: track.id,
-      userId: user.id,
+      userId: user.owner,
       soundscapeId: selectedSoundscape.id,
     });
 

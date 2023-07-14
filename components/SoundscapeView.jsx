@@ -1,6 +1,7 @@
 
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Header, Members, Player, SeedSongsList } from './index'; 
+import { Pressable } from '@react-native-material/core';
 
 const SoundscapeView = ({
     soundscape,
@@ -13,11 +14,20 @@ const SoundscapeView = ({
     onBackPressed,
     onSongPressed,
     onRegeneratePressed,
+    onSeedSongsPressed,
 }) => {
     return (
         <View style={styles.container}>
-          <Header title={soundscape.name} onBackPressed={onBackPressed} onOptionsPress={onOptionsPress}/>
-          <Pressable style={styles.members} onPress={onMembersPressed}>
+          <Header
+            title={soundscape.name}
+            onBackPressed={onBackPressed}
+            onOptionsPress={onOptionsPress}
+          />
+          <Pressable
+            style={styles.members}
+            onPress={onMembersPressed}
+            pressEffect='ripple'
+          >
             <Members members={soundscape.members}/>
           </Pressable>
           <View style={styles.main}>
@@ -29,6 +39,7 @@ const SoundscapeView = ({
               onNextPressed={onNextPressed}
               onSongPressed={onSongPressed}
               onRegeneratePressed={onRegeneratePressed}
+              onSeedSongsPressed={onSeedSongsPressed}
             />
           </View>
         </View>
@@ -37,7 +48,6 @@ const SoundscapeView = ({
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
       height: '100%',
@@ -50,6 +60,10 @@ const styles = StyleSheet.create({
     members: {
       width: '100%',
       marginBottom: '10px',
+      padding: 10,
+      borderRadius: 15,
+      backgroundColor: 'white',
+      filter: 'drop-shadow(0px 0px 4px gray)',
     },
     main: {
       width: '100%',
