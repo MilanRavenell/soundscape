@@ -8,17 +8,28 @@ export default function funcRemoveSeedSong({
 }) {
   const selectedSoundscapeIndex = state.selectedSoundscapeIndex;
   const soundscapes = state.soundscapes;
-  const selectedSoundscape = soundscapes[selectedSoundscapeIndex];
+  const selectedSoundscape = soundscapes
+    ? soundscapes[selectedSoundscapeIndex]
+    : null;
   const user = state.user;
 
   return useCallback(async (track) => {
-    const newSeedSongs = [...selectedSoundscape.seedTrackss];
+    console.log('deleting seed song')
+    if (
+      selectedSoundscapeIndex == null ||
+      soundscapes == null ||
+      selectedSoundscape == null
+    ) {
+      return;
+    }
+
+    const newSeedSongs = [...selectedSoundscape.seedTracks];
     const songToDeleteIndex = newSeedSongs.findIndex(({ id }) => id === track.id);
     newSeedSongs.splice(songToDeleteIndex, 1);
 
     const newSoundscape = {
       ...selectedSoundscape,
-      seedTrackss: newSeedSongs,
+      seedTracks: newSeedSongs,
     };
 
     await deleteSeedTrack({

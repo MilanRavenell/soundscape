@@ -31,7 +31,7 @@ export default function getPlaybackState({
         },
       )).data;
 
-      console.log('bruh: ', player);
+      // console.log('bruh: ', player);
 
       if (player?.item && player?.is_playing) {
         setState('curPlayingTrack', player.item);
@@ -41,7 +41,7 @@ export default function getPlaybackState({
         const curSongIndex = curQueueSongIds.indexOf(player?.item?.id);
         const curTracks = [];
 
-        console.log('song index: ', curSongIndex);
+        // console.log('song index: ', curSongIndex);
 
         // New song is not currently in the queue, add it
         if (curSongIndex === -1) {

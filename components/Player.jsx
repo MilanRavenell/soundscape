@@ -13,6 +13,7 @@ const QueueView = ({
   onRegeneratePressed,
   onSeedSongsPressed,
 }) => {
+  console.log('queue songs: ', songs)
   return (
     <View style={styles.queueContainer}>
       <View style={styles.btns}>

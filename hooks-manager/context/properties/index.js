@@ -25,6 +25,7 @@ import funcOpenMembersModal from './func-open-members-modal';
 import funcOpenOptionsModal from './func-open-options-modal';
 import funcOpenSeedSongsModal from './func-open-seed-songs-modal';
 import funcRegenerateSongs from './func-regenerate-songs';
+import funcRemoveSeedSong from './func-remove-seed-song';
 import selectedSoundscape from './selected-soundscape';
 import state from './state';
 
@@ -56,6 +57,7 @@ const properties = {
   funcOpenOptionsModal,
   funcOpenSeedSongsModal,
   funcRegenerateSongs,
+  funcRemoveSeedSong,
   selectedSoundscape,
   state,
 };

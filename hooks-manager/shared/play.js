@@ -11,11 +11,25 @@ export default async function play(
     return;
   }
 
-  console.log(tracks)
+  
+  const uris = tracks.map(({ uri }) => uri);
+  console.log('uris: ', uris);
+
+  // ensure shuffle is off
+  await axios.put(
+    'https://api.spotify.com/v1/me/player/shuffle?state=false',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${spotifyAccessToken}`,
+      }
+    }
+  );
+
   const response = await axios.put(
     'https://api.spotify.com/v1/me/player/play',
     {
-      ...(tracks ? { uris: tracks.map(({ uri }) => uri) } : {}),
+      ...(uris ? { uris } : {}),
       ...(position_ms ? { position_ms } : {}),
     },
     {

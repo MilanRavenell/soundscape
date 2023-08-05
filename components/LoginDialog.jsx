@@ -12,7 +12,6 @@ const LoginDialog = ({
     onDismiss,
     onConfirm,
 }) => {
-    console.log('bruhhhh: ', visible)
     return (
         <Dialog visible={visible} onDismiss={onDismiss}>
             <DialogHeader title="Connect Spotify Account" />
