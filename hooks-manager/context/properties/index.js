@@ -9,6 +9,7 @@ import funcCloseModal from './func-close-modal';
 import funcCopyInviteLinkToClipboard from './func-copy-invite-link-to-clipboard';
 import funcCreateNewSoundscape from './func-create-new-soundscape';
 import funcDeleteSoundscape from './func-delete-soundscape';
+import funcDeleteUser from './func-delete-user';
 import funcDeselectSoundscape from './func-deselect-soundscape';
 import funcGetInviteLink from './func-get-invite-link';
 import funcOnEditSoundscapeNameConfirm from './func-on-edit-soundscape-name-confirm';
@@ -20,9 +21,11 @@ import funcOnQueuedSongPressed from './func-on-queued-song-pressed';
 import funcOnSearchQueryChange from './func-on-search-query-change';
 import funcOpenAddSeedSongsModal from './func-open-add-seed-songs-modal';
 import funcOpenEditSoundcapeNameDialog from './func-open-edit-soundscape-name-dialog';
+import funcOpenHomeOptionsModal from './func-open-home-options-modal';
 import funcOpenInviteLinkDialog from './func-open-invite-link-dialog';
 import funcOpenMembersModal from './func-open-members-modal';
-import funcOpenOptionsModal from './func-open-options-modal';
+import funcOpenPrivacyPolicy from './func-open-privacy-policy';
+import funcOpenSoundscapeOptionsModal from './func-open-soundscape-options-modal';
 import funcOpenSeedSongsModal from './func-open-seed-songs-modal';
 import funcRegenerateSongs from './func-regenerate-songs';
 import funcRemoveSeedSong from './func-remove-seed-song';
@@ -41,6 +44,7 @@ const properties = {
   funcCopyInviteLinkToClipboard,
   funcCreateNewSoundscape,
   funcDeleteSoundscape,
+  funcDeleteUser,
   funcDeselectSoundscape,
   funcOnEditSoundscapeNameConfirm,
   funcGetInviteLink,
@@ -52,9 +56,11 @@ const properties = {
   funcOnSearchQueryChange,
   funcOpenAddSeedSongsModal,
   funcOpenEditSoundcapeNameDialog,
+  funcOpenHomeOptionsModal,
   funcOpenInviteLinkDialog,
   funcOpenMembersModal,
-  funcOpenOptionsModal,
+  funcOpenPrivacyPolicy,
+  funcOpenSoundscapeOptionsModal,
   funcOpenSeedSongsModal,
   funcRegenerateSongs,
   funcRemoveSeedSong,

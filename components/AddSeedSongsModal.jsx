@@ -13,10 +13,17 @@ const Song = ({
             style={styles.song}
             onPress={!isSeedSong ? (() => onPress(song)) : () => {}}
         >
-            <Image
-                style={styles.thumbnail}
-                source={song.album.images[0].url}
-            />
+            <View style={styles.thumbnail}>
+                <Image
+                    style={styles.thumbnailImg}
+                    source={song.album.images[0].url}
+                />
+                <Image
+                    style={styles.thumbnailAttribution}
+                    source={require('../assets/spotify_logo.png')}
+                />
+            </View>
+            
             <View style={styles.songInfo}>
                 <Text style={{
                     ...styles.title,
@@ -110,8 +117,20 @@ const styles = StyleSheet.create({
     thumbnail: {
         height: '70px',
         width: '70px',
-        objectFit: 'contain',
         marginRight: '10px',
+    },
+    thumbnailImg: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+    },
+    thumbnailAttribution: {
+        position: 'absolute',
+        bottom: 5,
+        right: 5,
+        height: 16,
+        width: 16,
+        resizeMode: 'contain',
     },
     textfieldContainer: {
         marginBottom: '20px',

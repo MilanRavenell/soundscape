@@ -3,12 +3,15 @@ import axios from 'axios';
 
 export default function checkStorageForSpotifyId({
   context,
+  state,
   useEffect,
   setState,
   }) {
+    const spotifyAccessToken = state.spotifyAccessToken;
+    
     useEffect(() => {
         (async () => {
-          if (context.domain.includes('invite')) {
+          if (context.domain.includes('invite') || spotifyAccessToken) {
             return;
           }
           
@@ -50,6 +53,6 @@ export default function checkStorageForSpotifyId({
           await new Promise(r => setTimeout(r, 500));
           setState('loginDialogOpen', true);
         })()
-    }, []);
+    }, [spotifyAccessToken]);
   }
   

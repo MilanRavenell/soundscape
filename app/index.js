@@ -14,9 +14,10 @@ import {
   AddSeedSongsModal,
   EditSoundscapeNameDialog,
   InviteLinkDialog,
+  HomeOptionsModal,
   LoginDialog,
   MembersModal,
-  OptionsModal,
+  SoundscapeOptionsModal,
   SeedSongsModal,
   SoundscapeSelectionView,
   SoundscapeView,
@@ -87,8 +88,10 @@ export default function App() {
         {(selectedSoundscape === null)
           ? <SoundscapeSelectionView
             soundscapes={context.state.soundscapes}
+            newSoundscapeLoading={context.state.newSoundscapeLoading}
             onSoundscapePress={(index) => setState('selectedSoundscapeIndex', index)}
             onNewSoundscapePress={context.funcCreateNewSoundscape}
+            onOptionsPress={context.funcOpenHomeOptionsModal}
           />
           : <SoundscapeView
             soundscape={selectedSoundscape}
@@ -96,15 +99,22 @@ export default function App() {
             isActive={context.state.activated}
             onPlayPressed={context.funcOnPlayPressed}
             onNextPressed={context.funcOnNextPressed}
-            onOptionsPress={context.funcOpenOptionsModal}
+            onOptionsPress={context.funcOpenSoundscapeOptionsModal}
             onMembersPressed={context.funcOpenMembersModal}
             onBackPressed={context.funcDeselectSoundscape}
             onSongPressed={context.funcOnQueuedSongPressed}
             onRegeneratePressed={context.funcRegenerateSongs}
             onSeedSongsPressed={context.funcOpenSeedSongsModal}
           />}
-        {context.state.optionsModalOpen && (
-          <OptionsModal
+        {context.state.homeOptionsModalOpen && (
+          <HomeOptionsModal
+            closeModal={context.funcCloseModal}
+            onDeleteAccountPressed={context.funcDeleteUser}
+            onPrivacyPolicyPressed={context.funcOpenPrivacyPolicy}
+          />
+        )}
+        {context.state.soundscapeOptionsModalOpen && (
+          <SoundscapeOptionsModal
             closeModal={context.funcCloseModal}
             onEditSoundscapeNamePressed={context.funcOpenEditSoundcapeNameDialog}
             onLeaveSoundscapePressed={context.funcDeleteSoundscape}
@@ -163,7 +173,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: '#e6d9ff',
-    backgroundImage: 'linear-gradient(200deg, #80559e, white)',
+    backgroundImage: 'linear-gradient(200deg, black, white)',
     alignItems: 'center',
     justifyContent: 'center',
     height: '100dvh',

@@ -5,8 +5,10 @@ import createUser from "./create-user";
 import deleteSeedTrack from './delete-seed-track';
 import deleteSoundscape from './delete-soundscape';
 import deleteSoundscapeMember from './delete-soundscape-member';
+import deleteUser from './delete-user';
 import handleSpotifyAuthCode from './handle-spotify-auth-code';
 import getSeedTracksBySoundscapeId from './get-seed-tracks-by-soundscape-id';
+import getSeedTracksByUserId from './get-seed-tracks-by-user-id';
 import getSoundscape from './get-soundscape';
 import getSoundscapesByUser from "./get-soundscapes-by-user";
 import getSoundscapeMembersBySoundscapeId from './get-soundscape-members-by-soundscape-id';
@@ -23,8 +25,10 @@ export {
     deleteSeedTrack,
     deleteSoundscape,
     deleteSoundscapeMember,
+    deleteUser,
     handleSpotifyAuthCode,
     getSeedTracksBySoundscapeId,
+    getSeedTracksByUserId,
     getSoundscape,
     getSoundscapesByUser,
     getSoundscapeMembersBySoundscapeId,

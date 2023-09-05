@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Image, Text, View, Button } from 'react-native';
-import { Pressable } from '@react-native-material/core';
+import { StyleSheet, Image, Text, View, Linking , Pressable} from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
@@ -20,7 +19,6 @@ const QueueView = ({
         <Pressable
           style={styles.regenerateBtn}
           onPress={onSeedSongsPressed}
-          pressEffect='ripple'
         >
           <FontAwesome5 name="seedling" size={16} color="white" />
           <Text style={styles.regenerateBtnText}>Seed Songs</Text>
@@ -28,7 +26,6 @@ const QueueView = ({
         <Pressable
           style={styles.regenerateBtn}
           onPress={onRegeneratePressed}
-          pressEffect='ripple'
         >
           <Entypo name="cycle" size={16} color="white" />
           <Text style={styles.regenerateBtnText}>Regenerate</Text>
@@ -39,10 +36,15 @@ const QueueView = ({
           <Pressable
             style={styles.song}
             onPress={() => onSongPressed(song)}
-            pressEffect='ripple'
             key={index}
           >
-            <Image style={styles.thumbnail} source={song.album.images[0].url} />
+            <View style={styles.thumbnail}>
+              <Image style={styles.thumbnailImg} source={song.album.images[0]?.url} />
+              <Image
+                  style={styles.thumbnailAttribution}
+                  source={require('../assets/spotify_logo.png')}
+              />
+            </View>
             <View style={styles.queueSongInfo}>
               <Text style={{
                 ...styles.queueSongTitle,
@@ -67,6 +69,16 @@ const CurSongView = ({
       <View style={styles.coverView}>
         <Image style={styles.coverImage} source={curSong.album.images[0].url}/>
       </View>
+      <Pressable
+        style={styles.attribution}
+        onPress={() => Linking.openURL('https://open.spotify.com/')
+      }>
+        <Image
+          style={styles.spotifyLogo}
+          source={require('../assets/spotify_logo.png')}
+        />
+        <Text style={styles.attributionText}>Listen on Spotify</Text>
+      </Pressable>
       <Text style={styles.titleLabel}>{curSong.name}</Text>
       <Text style={styles.artistLabel}>{curSong.artists[0].name}</Text>
     </View>
@@ -104,7 +116,7 @@ const Player = ({
       </View>
       <View style={styles.buttons}>
         <View style={styles.view}>
-          <Pressable onPress={onViewPressed} pressEffect='ripple'>
+          <Pressable onPress={onViewPressed}>
             {(view === 'cur_song')
               ? <AntDesign name="bars" size={38} color="black" />
               : <Entypo name="image" size={38} color="black" />}
@@ -115,7 +127,6 @@ const Player = ({
             <Pressable
               style={styles.circleButton}
               onPress={onPlayPressed}
-              pressEffect='ripple'
             >
               <AntDesign name={isPaused ? 'caretright' : 'pause'} size={38} color='#25292e' />
             </Pressable>
@@ -126,7 +137,6 @@ const Player = ({
             <Pressable
               style={styles.circleButton}
               onPress={onNextPressed}
-              pressEffect='ripple'
             >
               <AntDesign name='stepforward' size={38} color='#25292e' />
             </Pressable>
@@ -164,6 +174,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  attribution: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+  },
+  spotifyLogo: {
+    height: 16,
+    width: 16,
+    resizeMode: 'contain',
+  },
+  attributionText: {
+    marginLeft: 5,
+    color: 'gray'
+  },
   titleLabel: {
     fontSize: '25px',
     textAlign: 'left',
@@ -171,7 +196,7 @@ const styles = StyleSheet.create({
   },
   artistLabel: {
     fontSize: '20px',
-    color: 'lightgray',
+    color: 'gray',
     textAlign: 'left',
     width: '100%',
   },
@@ -259,16 +284,28 @@ const styles = StyleSheet.create({
     marginVertical: '5px',
     padding: '5px',
     border: '1px solid black',
-    borderRadius: '50px',
+    borderRadius: '5px',
     alignItems: 'center'
   },
   thumbnail: {
     width: '70px',
     height: '70px',
     overflow: 'hidden',
-    objectFit: 'contain',
     marginRight: '20px',
-    borderRadius: '50%',
+    position: 'relative'
+  },
+  thumbnailImg: {
+    height: '100%',
+    width: '100%',
+    objectFit: 'contain',
+  },
+  thumbnailAttribution: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    height: 16,
+    width: 16,
+    resizeMode: 'contain'
   },
   queueSongTitle: {
     fontSize: '24px',

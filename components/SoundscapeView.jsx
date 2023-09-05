@@ -1,7 +1,6 @@
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { Header, Members, Player, SeedSongsList } from './index'; 
-import { Pressable } from '@react-native-material/core';
 
 const SoundscapeView = ({
     soundscape,
@@ -26,7 +25,6 @@ const SoundscapeView = ({
           <Pressable
             style={styles.members}
             onPress={onMembersPressed}
-            pressEffect='ripple'
           >
             <Members members={soundscape.members}/>
           </Pressable>

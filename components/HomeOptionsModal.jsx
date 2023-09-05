@@ -1,7 +1,6 @@
 
 import { StyleSheet, View, Pressable, Text } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Ionicons, Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import { Modal } from './index';
 
@@ -22,24 +21,24 @@ const Option = ({
     );
 }
 
-const OptionsModal = ({
+const HomeOptionsModal = ({
     closeModal,
-    onEditSoundscapeNamePressed,
-    onLeaveSoundscapePressed,
+    onDeleteAccountPressed,
+    onPrivacyPolicyPressed,
 }) => {
     return (
         <Modal title={'Options'} closeModal={closeModal}>
             <View style={styles.container}>
                 <View style={styles.main}>
                     <Option
-                        title={'Edit Soundscape Name'}
-                        icon={<Entypo name="edit" size={36} color="white" />}
-                        onPress={onEditSoundscapeNamePressed}
+                        title={'Disconnect Spotify Account'}
+                        icon={<AntDesign name="deleteuser" size={36} color="white" />}
+                        onPress={onDeleteAccountPressed}
                     />
                     <Option
-                        title={'Leave Soundscape'}
-                        icon={<Ionicons name="exit" size={36} color="white" />}
-                        onPress={onLeaveSoundscapePressed}
+                        title={'Privacy Policy'}
+                        icon={<AntDesign name="infocirlceo" size={36} color="white" />}
+                        onPress={onPrivacyPolicyPressed}
                     />
                 </View>
             </View>
@@ -73,4 +72,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default OptionsModal;
+export default HomeOptionsModal;

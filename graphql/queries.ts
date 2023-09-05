@@ -361,6 +361,47 @@ export const seedTracksBySoundscapeIdAndUserId = /* GraphQL */ `
     }
   }
 `;
+export const seedTracksByUserId = /* GraphQL */ `
+  query SeedTracksByUserId(
+    $userId: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSeedTrackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    seedTracksByUserId(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        key
+        spotifyId
+        soundscapeId
+        userId
+        user {
+          owner
+          spotifyId
+          displayName
+          spotifyAccessToken
+          spotifyRefreshToken
+          soundscapes {
+            nextToken
+          }
+          topTrackIds
+          profPicUrl
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const soundscapeMemberBySoundscapeId = /* GraphQL */ `
   query SoundscapeMemberBySoundscapeId(
     $soundscapeId: String!

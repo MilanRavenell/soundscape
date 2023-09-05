@@ -1411,6 +1411,46 @@ export type SeedTracksBySoundscapeIdAndUserIdQuery = {
   } | null,
 };
 
+export type SeedTracksByUserIdQueryVariables = {
+  userId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelSeedTrackFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type SeedTracksByUserIdQuery = {
+  seedTracksByUserId?:  {
+    __typename: "ModelSeedTrackConnection",
+    items:  Array< {
+      __typename: "SeedTrack",
+      key: string,
+      spotifyId: string,
+      soundscapeId: string,
+      userId: string,
+      user?:  {
+        __typename: "User",
+        owner: string,
+        spotifyId?: string | null,
+        displayName?: string | null,
+        spotifyAccessToken?: string | null,
+        spotifyRefreshToken?: string | null,
+        soundscapes?:  {
+          __typename: "ModelSoundscapeMemberConnection",
+          nextToken?: string | null,
+        } | null,
+        topTrackIds?: Array< string > | null,
+        profPicUrl?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type SoundscapeMemberBySoundscapeIdQueryVariables = {
   soundscapeId: string,
   userId?: ModelStringKeyConditionInput | null,

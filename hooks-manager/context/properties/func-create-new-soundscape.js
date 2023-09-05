@@ -12,6 +12,8 @@ export default function funcCreateNewSoundscape({
   const spotifyAccessToken = state.spotifyAccessToken;
 
   return useCallback(async () => {
+    setState('newSoundscapeLoading', true);
+
     const newSoundscape = {
       id: uuidv4(),
       name: 'New Soundscape',
@@ -38,6 +40,7 @@ export default function funcCreateNewSoundscape({
 
     setState('soundscapes', newSoundscapes);
     setState('selectedSoundscapeIndex', newSoundscapes.length - 1);
+    setState('newSoundscapeLoading', false);
 
     await createSoundscape({
       id: newSoundscape.id,
@@ -48,6 +51,6 @@ export default function funcCreateNewSoundscape({
     await createSoundscapeMember({
       userId: user.owner,
       soundscapeId: newSoundscape.id,
-    })
+    });
   }, [soundscapes, user, spotifyAccessToken, setState]);
 }

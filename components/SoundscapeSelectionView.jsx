@@ -1,14 +1,8 @@
 
 import { StyleSheet, View, Pressable, Text, Image, FlatList } from 'react-native';
+import { ActivityIndicator } from "@react-native-material/core";
 import { Header, Members, Player, SeedSongsList } from './index';
 import { AntDesign } from '@expo/vector-icons';
-
-const coverTrackIds = [
-    "https://i.scdn.co/image/ab67616d0000b273361ceceb7926b29c5c34e517",
-    "https://i.scdn.co/image/ab67616d0000b273fd9f1660abcb440afb56ebcd",
-    "https://i.scdn.co/image/ab67616d0000b273f699ddbf531c0f39e452e0c0",
-    "https://i.scdn.co/image/ab67616d0000b2733783610207aa8461dac23d29",
-]
 
 const Soundscape = ({
     soundscape,
@@ -24,6 +18,10 @@ const Soundscape = ({
                             <Image
                                 style={styles.backgroundTrackImage}
                                 source={url}
+                            />
+                            <Image
+                                style={styles.attribution}
+                                source={require('../assets/spotify_logo.png')}
                             />
                         </View>
                     ))}
@@ -43,32 +41,47 @@ const Soundscape = ({
 
 const SoundscapeSelectionView = ({
     soundscapes,
+    newSoundscapeLoading,
     onSoundscapePress,
     onNewSoundscapePress,
+    onOptionsPress,
 }) => {
     return (
         <View style={styles.container}>
           <View style={styles.content}>
-            <Header title={'Your Soundscapes'}/>
+            <Header
+                title={'Your Soundscapes'}
+                onOptionsPress={onOptionsPress}
+            />
             <View style={styles.soundscapes}>
-              {(soundscapes && soundscapes.length > 0)
-                ? soundscapes.map((soundscape, index) => (
-                    <Soundscape
-                        soundscape={soundscape}
-                        onSoundscapePress={onSoundscapePress}
-                        key={index}
-                        index={index}
-                    />
-                ))
-                : (
+                {!soundscapes && (
+                    <View style={styles.loading}>
+                        <ActivityIndicator size='large' color='white'/>
+                    </View>
+                )}
+                {(soundscapes && soundscapes.length === 0) && (
                     <View style={styles.emptyMessage}>
                         <Text>You have no soundscapes</Text>
                     </View>
                 )}
+                {(soundscapes && soundscapes.length > 0)
+                    && soundscapes.map((soundscape, index) => (
+                        <Soundscape
+                            soundscape={soundscape}
+                            onSoundscapePress={onSoundscapePress}
+                            key={index}
+                            index={index}
+                        />
+                ))}
             </View>
             <View style={styles.newBtnContainer}>
                 <Pressable style={styles.newBtn} onPress={onNewSoundscapePress}>
-                    <AntDesign name="plus" size={24} color="white" />
+                    {newSoundscapeLoading
+                        ? (
+                            <ActivityIndicator color='white'/>
+                        ) : (
+                            <AntDesign name="plus" size={24} color="white" />
+                        )}
                     <Text style={styles.newBtnText}>New Soundscape</Text>
                 </Pressable>
             </View>
@@ -102,6 +115,12 @@ const styles = StyleSheet.create({
         width: '100%',
         overflowY: 'auto',
     },
+    loading: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     emptyMessage: {
         flex: 1,
         display: 'flex',
@@ -112,13 +131,13 @@ const styles = StyleSheet.create({
         width: '98%',
         backgroundColor: 'white',
         filter: 'drop-shadow(0px 0px 4px gray)',
-        borderRadius: '30px',
+        // borderRadius: '30px',
         marginHorizontal: '1%',
         marginBottom: '20px',
     },
     soundscapeInner: {
         width: '100%',
-        borderRadius: '30px',
+        // borderRadius: '30px',
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
@@ -175,12 +194,21 @@ const styles = StyleSheet.create({
     backgroundTrack: {
         flex: 1,
         height: '100%',
+        position: 'relative',
     },
     backgroundTrackImage: {
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
     },
+    attribution: {
+        position: 'absolute',
+        bottom: 5,
+        right: 5,
+        height: 16,
+        width: 16,
+        resizeMode: 'contain'
+    }
 });
 
 export default SoundscapeSelectionView;

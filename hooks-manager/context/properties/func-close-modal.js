@@ -4,8 +4,9 @@ export default function funcCloseModal({
 }) {
   return useCallback(() => {
     setState('seedSongsModalOpen', false);
-    setState('optionsModalOpen', false);
+    setState('soundscapeOptionsModalOpen', false);
     setState('addSeedSongsModalOpen', false);
     setState('membersModalOpen', false);
+    setState('homeOptionsModalOpen', false);
   }, [setState]);
 }

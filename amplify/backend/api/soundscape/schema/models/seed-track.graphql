@@ -6,7 +6,7 @@ type SeedTrack
   key: String! @primaryKey #<spotifyId>_<userId>_<soundscapeId>
   spotifyId: String!
   soundscapeId: String! @index(name: "BySoundscapeIdAndUserId", sortKeyFields: ["userId"], queryField: "seedTracksBySoundscapeIdAndUserId")
-  userId: String!
+  userId: String! @index(name: "ByUserId", queryField: "seedTracksByUserId")
   user: User @hasOne(fields: ["userId"])
   createdAt: String!
   updatedAt: String!

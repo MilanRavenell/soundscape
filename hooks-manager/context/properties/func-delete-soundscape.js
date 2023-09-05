@@ -16,7 +16,7 @@ export default function funcDeleteSoundscape({
     });
 
     await deleteSoundscapeMember({
-        userId: user.id,
+        userId: user.owner,
         soundscapeId: selectedSoundscape.id,
     });
 
@@ -25,6 +25,6 @@ export default function funcDeleteSoundscape({
 
     setState('selectedSoundscapeIndex', null);
     setState('soundscapes', newSoundscapes);
-    setState('optionsModalOpen', false);
+    setState('soundscapeOptionsModalOpen', false);
   }, [soundscapes, selectedSoundscapeIndex, user, setState]);
 }
